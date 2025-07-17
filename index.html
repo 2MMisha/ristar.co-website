@@ -87,12 +87,7 @@
       100% { width: 100%; }
     }
 
-    /* Плавность и анимации для всего сайта */
-    html, body, nav, header, section, footer, .header-content, .nav-left a, .lang-switcher button, .contact-form input, .contact-form textarea, .contact-form button {
-      transition: all 0.4s ease;
-    }
-
-    /* Остальной CSS */
+    /* Основные стили */
     html, body {
       margin: 0;
       padding: 0;
@@ -102,7 +97,7 @@
       height: 100%;
     }
 
-    /* НОВЫЕ СТИЛИ ДЛЯ НАВИГАЦИИ */
+    /* Навигация */
     nav {
       position: fixed;
       top: 0;
@@ -110,63 +105,29 @@
       width: 100%;
       background-color: #0c57ab;
       z-index: 1000;
+      padding: 10px 20px;
+      box-sizing: border-box;
     }
 
     .nav-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
-      padding: 10px 20px;
-      box-sizing: border-box;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .nav-left img {
+    .nav-brand img {
       height: 40px;
       cursor: pointer;
+      transition: transform 0.3s ease;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 15px;
+    .nav-brand img:hover {
+      transform: scale(1.05);
     }
 
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .results-btn {
-      background-color: #fff;
-      color: #0c57ab;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: background-color 0.3s ease;
-    }
-
-    .results-btn:hover {
-      background-color: #e6e6e6;
-    }
-
-    /* Стили для гамбургер-меню */
+    /* Гамбургер меню */
     .hamburger {
       display: none;
       background: none;
@@ -185,75 +146,89 @@
       transition: all 0.3s ease;
     }
 
-    .no-scroll {
-      overflow: hidden;
+    /* Мобильное меню */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background: #0c57ab;
+      z-index: 1000;
+      transition: right 0.3s ease;
+      padding-top: 70px;
+      box-shadow: -5px 0 15px rgba(0,0,0,0.2);
     }
 
-    /* Адаптивные стили для меню */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: block;
-      }
-      
-      .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 70%;
-        max-width: 300px;
-        height: 100vh;
-        background: #0c57ab;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        transition: right 0.3s ease;
-        z-index: 1000;
-        padding-top: 80px;
-      }
-      
-      .nav-links.active {
-        right: 0;
-      }
-      
-      /* Анимация гамбургера */
-      .hamburger.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-      }
-      
-      .hamburger.active span:nth-child(2) {
-        opacity: 0;
-      }
-      
-      .hamburger.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px);
-      }
-      
-      /* Затемнение фона */
-      .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-        z-index: 999;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-      }
-      
-      .overlay.active {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .results-btn {
-        display: none;
-      }
+    .mobile-menu.active {
+      right: 0;
     }
 
-    /* Остальные существующие стили */
+    .mobile-menu-content {
+      display: flex;
+      flex-direction: column;
+      height: calc(100% - 70px);
+      padding: 20px;
+    }
+
+    .nav-link {
+      color: white;
+      padding: 15px 0;
+      text-decoration: none;
+      font-size: 1.1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #aad4ff;
+    }
+
+    .nav-btn {
+      background: white;
+      color: #0c57ab;
+      margin: 15px 0;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
+      padding: 12px;
+      transition: background 0.3s ease;
+    }
+
+    .nav-btn:hover {
+      background: #e6e6e6;
+    }
+
+    /* Языковые кнопки */
+    .mobile-lang-switcher {
+      margin-top: auto;
+      padding-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .mobile-lang-switcher button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-lang-switcher button:hover {
+      transform: scale(1.1);
+    }
+
+    .mobile-lang-switcher img {
+      width: 30px;
+      height: 20px;
+      border-radius: 2px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+
+    /* Остальные стили */
     .div-start {
       background-color: #0c57ab;
       padding: 20px;
@@ -401,6 +376,38 @@
       color: #fff;
     }
 
+    /* Анимации гамбургера */
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* Затемнение фона */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
     /* Адаптивность */
     @media (max-width: 900px) {
       section {
@@ -418,11 +425,13 @@
       }
     }
 
-    @media (max-width: 600px) {
-      .nav-container {
-        padding: 10px 15px;
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
       }
+    }
 
+    @media (max-width: 600px) {
       h1 {
         font-size: 1.8rem;
       }
@@ -459,47 +468,51 @@
     </div>
   </div>
 
-  <!-- НОВАЯ НАВИГАЦИЯ -->
+  <!-- НАВИГАЦИЯ -->
   <nav>
     <div class="nav-container">
-      <div class="nav-left">
-        <img src="logo-w.png" alt="Rising Star Manager Logo" onclick="scrollToTop()" />
-        <div class="nav-links" id="navLinks">
-          <a id="nav-desc" href="#desc-text">Описание</a>
-          <a id="nav-serv" href="#services-text">Сервисы</a>
-          <a id="nav-cont" href="#contact-form">Контакты</a>
-        </div>
+      <div class="nav-brand">
+        <img src="logo-w.png" alt="Rising Star Logo" onclick="scrollToTop()" />
       </div>
       
-      <div class="nav-right">
-        <a href="https://results.ristar.co" class="results-btn" target="_blank">Результаты</a>
-        <div class="lang-switcher" aria-label="Language switcher">
-          <button onclick="switchLang('en')" aria-label="Switch to English">
-            <img src="https://flagcdn.com/w40/gb.png" alt="English" style="height: 20px; vertical-align: middle;" />
-            English
-          </button>
-          <button onclick="switchLang('ru')" aria-label="Switch to Russian">
-            <img src="https://flagcdn.com/w40/ru.png" alt="Русский" style="height: 20px; vertical-align: middle;" />
-            Русский
-          </button>
-          <button onclick="switchLang('he')" aria-label="Switch to Hebrew">
-            <img src="https://flagcdn.com/w40/il.png" alt="עברית" style="height: 20px; vertical-align: middle;" />
-            עברית
-          </button>
+      <button class="hamburger" id="hamburger" aria-expanded="false" aria-label="Меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+          <a href="#desc-text" class="nav-link" id="nav-desc">Описание</a>
+          <a href="#services-text" class="nav-link" id="nav-serv">Сервисы</a>
+          <a href="#contact-form" class="nav-link" id="nav-cont">Контакты</a>
+          <a href="https://results.ristar.co" class="nav-link nav-btn" target="_blank" id="nav-results">Результаты</a>
+          <a href="https://registration.ristar.co" class="nav-link nav-btn" target="_blank" id="nav-register">Регистрация</a>
+          
+          <div class="mobile-lang-switcher">
+            <button onclick="switchLang('en')" aria-label="English">
+              <img src="https://flagcdn.com/w40/gb.png" alt="English" />
+            </button>
+            <button onclick="switchLang('ru')" aria-label="Русский">
+              <img src="https://flagcdn.com/w40/ru.png" alt="Русский" />
+            </button>
+            <button onclick="switchLang('he')" aria-label="עברית">
+              <img src="https://flagcdn.com/w40/il.png" alt="עברית" />
+            </button>
+          </div>
         </div>
-        <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </div>
   </nav>
 
-  <!-- Остальное содержимое остается без изменений -->
+  <!-- Затемнение фона -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ОСНОВНОЕ СОДЕРЖИМОЕ -->
   <header>
-    <video autoplay muted loop playsinline class="video-bg" aria-hidden="true" tabindex="-1">
-      <source src="header.webm" type="video/webm" />
+    <video autoplay muted loop playsinline class="video-bg" aria-hidden="true" tabindex="-1" preload="none" poster="placeholder.jpg">
+      <source src="header.webm" type="video/webm">
+      <source src="header.mp4" type="video/mp4">
     </video>
     <div class="header-content">
       <div class="div-start">
@@ -583,11 +596,16 @@
           "Система считает и обновляет результаты в реальном времени",
           "Публикуем итоги и выдаём сертификаты"
         ],
-        nav: { description: "Описание", services: "Сервисы", contact: "Контакты" },
+        nav: { 
+          description: "Описание", 
+          services: "Сервисы", 
+          contact: "Контакты",
+          results: "Результаты",
+          register: "Регистрация"
+        },
         form: { heading: "Связаться с нами", name: "Ваше имя", email: "Ваш Email", message: "Ваше сообщение...", send: "Отправить" },
         footer: "Все права защищены.",
-        toast: "✅ Отправлено, спасибо!",
-        results: "Результаты"
+        toast: "✅ Отправлено, спасибо!"
       },
       en: {
         lang: "en", dir: "ltr",
@@ -604,11 +622,16 @@
           "The system calculates and updates results in real time",
           "We publish final standings and issue certificates"
         ],
-        nav: { description: "Description", services: "Services", contact: "Contact" },
+        nav: { 
+          description: "Description", 
+          services: "Services", 
+          contact: "Contact",
+          results: "Results",
+          register: "Registration"
+        },
         form: { heading: "Contact Us", name: "Your Name", email: "Your Email", message: "Your Message...", send: "Send" },
         footer: "All rights reserved.",
-        toast: "✅ Sent, thank you!",
-        results: "Results"
+        toast: "✅ Sent, thank you!"
       },
       he: {
         lang: "he", dir: "rtl",
@@ -625,11 +648,16 @@
           "התוצאות מתעדכנות בזמן אמת",
           "מפרסמים את התוצאות ומנפיקים תעודות"
         ],
-        nav: { description: "תיאור", services: "שירותים", contact: "צור קשר" },
+        nav: { 
+          description: "תיאור", 
+          services: "שירותים", 
+          contact: "צור קשר",
+          results: "תוצאות",
+          register: "הרשמה"
+        },
         form: { heading: "צור קשר", name: "שמך", email: "האימייל שלך", message: "ההודעה שלך...", send: "שלח" },
         footer: "כל הזכויות שמורות.",
-        toast: "✅ נשלח, תודה!",
-        results: "תוצאות"
+        toast: "✅ נשלח, תודה!"
       }
     };
 
@@ -638,31 +666,35 @@
       document.documentElement.lang = t.lang;
       document.documentElement.dir = t.dir;
 
+      // Обновляем основной контент
       document.getElementById('main-title').innerText = t.title;
       document.getElementById('tagline').innerText = t.tagline;
       document.getElementById('desc-text').innerText = t.description;
       document.getElementById('services-title').innerText = t.servicesTitle;
+      
+      // Обновляем шаги
       const serviceSteps = t.servicesSteps;
       for (let i = 0; i < serviceSteps.length; i++) {
         const stepEl = document.getElementById(`step-${i}`);
         if (stepEl) stepEl.innerText = serviceSteps[i];
       }
 
+      // Обновляем навигацию
       document.getElementById('nav-desc').innerText = t.nav.description;
       document.getElementById('nav-serv').innerText = t.nav.services;
       document.getElementById('nav-cont').innerText = t.nav.contact;
+      document.getElementById('nav-results').innerText = t.nav.results;
+      document.getElementById('nav-register').innerText = t.nav.register;
 
+      // Обновляем форму
       document.getElementById('form-heading').innerText = t.form.heading;
       document.getElementById('name-field').placeholder = t.form.name;
       document.getElementById('email-field').placeholder = t.form.email;
       document.getElementById('message-field').placeholder = t.form.message;
       document.getElementById('submit-button').innerText = t.form.send;
 
+      // Обновляем футер
       document.getElementById('footer-text').innerText = `© 2025 Rising Star Manager. ${t.footer}`;
-      
-      // Обновляем текст кнопки результатов
-      const resultsBtn = document.querySelector('.results-btn');
-      if (resultsBtn) resultsBtn.innerText = t.results;
     }
 
     // Функция для скролла наверх
@@ -673,73 +705,83 @@
       });
     }
 
-    // По умолчанию русский
-    switchLang('ru');
-
+    // Инициализация после загрузки DOM
     document.addEventListener('DOMContentLoaded', function() {
-      // Инициализация гамбургер-меню
+      // Управление меню
       const hamburger = document.getElementById('hamburger');
-      const navLinks = document.getElementById('navLinks');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('overlay');
       const body = document.body;
-      
-      // Создаем overlay для затемнения фона
-      const overlay = document.createElement('div');
-      overlay.className = 'overlay';
-      document.body.appendChild(overlay);
-      
+
       hamburger.addEventListener('click', function() {
-        this.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        overlay.classList.toggle('active');
-        body.classList.toggle('no-scroll');
-        
-        // Обновляем aria-атрибуты для доступности
         const isExpanded = this.getAttribute('aria-expanded') === 'true';
         this.setAttribute('aria-expanded', !isExpanded);
-      });
-      
-      // Закрываем меню при клике на overlay
-      overlay.addEventListener('click', function() {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-        this.classList.remove('active');
-        body.classList.remove('no-scroll');
-        hamburger.setAttribute('aria-expanded', 'false');
-      });
-      
-      // Закрываем меню при клике на ссылку
-      document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', function() {
-          if (window.innerWidth <= 768) {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-            overlay.classList.remove('active');
-            body.classList.remove('no-scroll');
-            hamburger.setAttribute('aria-expanded', 'false');
-          }
-        });
+        mobileMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        body.classList.toggle('no-scroll');
+        this.classList.toggle('active');
       });
 
-      // Устанавливаем обработчик на полную загрузку страницы
+      // Закрытие меню при клике на overlay
+      overlay.addEventListener('click', function() {
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.classList.remove('no-scroll');
+        hamburger.classList.remove('active');
+      });
+
+      // Ленивая загрузка видео
+      const video = document.querySelector('.video-bg');
+      const videoObserver = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) {
+          video.querySelectorAll('source').forEach(source => {
+            source.src = source.getAttribute('data-src') || source.src;
+          });
+          video.load();
+          videoObserver.unobserve(video);
+        }
+      }, {threshold: 0.1});
+
+      videoObserver.observe(video);
+
+      // Обработка формы
+      document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const data = new FormData(form);
+        
+        try {
+          const response = await fetch('https://formsubmit.co/ajax/risingstarco@gmail.com', {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            form.reset();
+            const toast = document.getElementById('formSuccessToast');
+            toast.textContent = translations[document.documentElement.lang].toast;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+          }
+        } catch (error) {
+          alert('Ошибка отправки формы');
+        }
+      });
+
+      // Завершение загрузки
       window.addEventListener('load', function() {
         const loader = document.getElementById('loader');
         if (loader) {
-          // Добавляем класс для скрытия лоадера
           loader.classList.add('hidden');
-          
-          // Добавляем класс для показа основного контента
           document.body.classList.remove('preload');
           document.body.classList.add('loaded');
-          
-          // Удаляем лоадер из DOM после завершения анимации
-          setTimeout(function() {
-            loader.remove();
-            overlay.remove();
-          }, 700);
+          setTimeout(() => loader.remove(), 700);
         }
       });
-      
-      // Fallback на случай если событие load не сработает
+
+      // Fallback для загрузчика
       setTimeout(function() {
         if (document.body.classList.contains('preload')) {
           const loader = document.getElementById('loader');
@@ -747,40 +789,14 @@
             loader.classList.add('hidden');
             document.body.classList.remove('preload');
             document.body.classList.add('loaded');
-            setTimeout(function() {
-              loader.remove();
-              overlay.remove();
-            }, 700);
+            setTimeout(() => loader.remove(), 700);
           }
         }
-      }, 5000); // Максимальное время ожидания 5 секунд
+      }, 5000);
     });
 
-    // Обработка формы
-    document.getElementById('contactForm').addEventListener('submit', async function(event) {
-      event.preventDefault();
-
-      const form = event.target;
-      const data = new FormData(form);
-      try {
-        const response = await fetch('https://formsubmit.co/ajax/2mmedia.il@gmail.com', {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-          form.reset();
-          const toast = document.getElementById('formSuccessToast');
-          toast.classList.add('show');
-          setTimeout(() => toast.classList.remove('show'), 3000);
-        } else {
-          alert('Ошибка отправки формы, попробуйте позже.');
-        }
-      } catch (error) {
-        alert('Ошибка сети, попробуйте позже.');
-      }
-    });
+    // По умолчанию русский язык
+    switchLang('ru');
   </script>
 </body>
 </html>
