@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Rising Star Manager — платформа для менеджмента соревнований" />
+  <meta name="keywords" content="менеджмент соревнований, регистрация, расписание, судейство, итоги, соревнования, sport management" />
+  <meta name="author" content="Rising Star Manager Team" />
+  <link rel="canonical" href="https://ristar.co/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Rising Star Manager" />
+  <meta property="og:description" content="Платформа для менеджмента соревнований. Регистрация, расписание, судейство и многое другое." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ristar.co/" />
+  <meta property="og:image" content="https://ristar.co/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rising Star Manager" />
+  <meta name="twitter:description" content="Платформа для менеджмента соревнований. Регистрация, расписание, судейство и многое другое." />
+  <meta name="twitter:image" content="https://ristar.co/twitter-image.png" />
+
+  <title>Rising Star Manager</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arimo', 'Montserrat', sans-serif;
+      background-color: #0c57ab;
+      color: #fff;
+      height: 100%;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #0c57ab;
+      padding: 10px 20px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-left img {
+      height: 40px;
+      margin-right: 15px;
+    }
+
+    .nav-left a {
+      color: #fff;
+      margin-right: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .lang-switcher button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-left: 10px;
+      padding: 5px;
+    }
+
+    .div-start {
+      background-color: #0c57ab;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    header {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .header-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(12, 87, 171, 0.3);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px 20px;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      max-height: 80px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .tagline {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      max-width: 600px;
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 100px auto 40px auto;
+      background: #fff;
+      color: #1c1c1c;
+      border-radius: 12px;
+      box-sizing: border-box;
+    }
+
+    .description, .services {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .contact-form {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .contact-form h2 {
+      margin-bottom: 20px;
+      color: #0c57ab;
+    }
+
+    .contact-form form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .contact-form button {
+      padding: 12px 24px;
+      background-color: #0c57ab;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-form button:hover,
+    .contact-form button:focus {
+      background-color: #094a7a;
+      outline: none;
+    }
+
+    .form-success-toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #28a745;
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .form-success-toast.show {
+      display: block;
+      opacity: 1;
+    }
+
+    footer {
+      background-color: #0c57ab;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 900px) {
+      section {
+        margin: 80px 15px 30px 15px;
+        padding: 30px 15px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .tagline {
+        font-size: 1.3rem;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        padding: 10px 10px;
+        flex-wrap: wrap;
+      }
+
+      .nav-left {
+        width: 100%;
+        margin-bottom: 10px;
+        justify-content: center;
+      }
+
+      .nav-left a {
+        margin-right: 10px;
+        font-size: 0.9rem;
+      }
+
+      .nav-left img {
+        margin-bottom: 10px;
+        height: 35px;
+      }
+
+      .lang-switcher {
+        width: 100%;
+        text-align: center;
+      }
+
+      .lang-switcher button {
+        font-size: 0.9rem;
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .tagline {
+        font-size: 1rem;
+        padding: 8px;
+      }
+
+      section {
+        margin: 80px 10px 20px 10px;
+        padding: 20px 15px;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        font-size: 0.9rem;
+        padding: 10px;
+      }
+
+      .contact-form button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-left">
+      <img src="logo-w.png" alt="Rising Star Manager Logo" />
+      <a id="nav-desc" href="#desc-text">Описание</a>
+      <a id="nav-serv" href="#services-text">Сервисы</a>
+      <a id="nav-cont" href="#contact-form">Контакты</a>
+    </div>
+    <div class="lang-switcher" aria-label="Language switcher">
+      <button onclick="switchLang('en')" aria-label="Switch to English">🇬🇧 EN</button>
+      <button onclick="switchLang('ru')" aria-label="Switch to Russian">🇷🇺 RU</button>
+      <button onclick="switchLang('he')" aria-label="Switch to Hebrew">🇮🇱 HE</button>
+    </div>
+  </nav>
+
+  <header>
+    <video autoplay muted loop playsinline class="video-bg" aria-hidden="true" tabindex="-1">
+      <source src="header.mp4" type="video/mp4" />
+    </video>
+    <div class="header-content">
+      <div class="div-start">
+        <img src="logo-w.png" alt="Rising Star Manager Logo" class="logo" />
+        <h1 id="main-title">Rising Star Manager</h1>
+        <div class="tagline" id="tagline">Ваши соревнования — наша система</div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="description">
+      <p id="desc-text">
+        Rising Star Manager — универсальный сервис для полного менеджмента соревнований.
+      </p>
+    </div>
+    <div class="services">
+      <p id="services-text">
+        Наши сервисы включают: регистрацию, расписание, судейство, итоги и многое другое.
+      </p>
+    </div>
+
+    <div class="contact-form" id="contact-form">
+      <h2 id="form-heading">Связаться с нами</h2>
+      <form id="contactForm" aria-label="Contact form">
+        <input id="name-field" type="text" name="name" placeholder="Ваше имя" required aria-required="true" />
+        <input id="email-field" type="email" name="email" placeholder="Ваш Email" required aria-required="true" />
+        <textarea id="message-field" name="message" rows="5" placeholder="Ваше сообщение..." required aria-required="true"></textarea>
+        <input type="text" name="_honey" style="display:none" autocomplete="off" />
+        <input type="hidden" name="_captcha" value="false" />
+        <button id="submit-button" type="submit">Отправить</button>
+      </form>
+      <div class="form-success-toast" id="formSuccessToast" role="alert" aria-live="assertive" aria-atomic="true">✅ Отправлено, спасибо!</div>
+    </div>
+  </section>
+
+  <footer>
+    <div id="footer-text">© 2025 Rising Star Manager. Все права защищены.</div>
+  </footer>
+
+  <script>
+    const translations = {
+      ru: {
+        lang: "ru", dir: "ltr",
+        title: "Rising Star Manager",
+        tagline: "Ваши соревнования — наша система",
+        description: "Rising Star Manager — универсальный сервис для полного менеджмента соревнований.",
+        services: "Наши сервисы включают: регистрацию, расписание, судейство, итоги и многое другое.",
+        nav: { description: "Описание", services: "Сервисы", contact: "Контакты" },
+        form: { heading: "Связаться с нами", name: "Ваше имя", email: "Ваш Email", message: "Ваше сообщение...", send: "Отправить" },
+        footer: "Все права защищены.",
+        toast: "✅ Отправлено, спасибо!"
+      },
+      en: {
+        lang: "en", dir: "ltr",
+        title: "Rising Star Manager",
+        tagline: "Your competition, our system",
+        description: "Rising Star Manager is a full-service competition management platform.",
+        services: "Our services include registration, scheduling, judging, results, and more.",
+        nav: { description: "Description", services: "Services", contact: "Contact" },
+        form: { heading: "Contact Us", name: "Your Name", email: "Your Email", message: "Your Message...", send: "Send" },
+        footer: "All rights reserved.",
+        toast: "✅ Sent, thank you!"
+      },
+      he: {
+        lang: "he", dir: "rtl",
+        title: "Rising Star Manager",
+        tagline: "התחרות שלכם – המערכת שלנו",
+        description: "Rising Star Manager הוא שירות לניהול תחרויות מקצה לקצה.",
+        services: "השירותים שלנו כוללים: רישום, לוח זמנים, שיפוט, תוצאות ועוד.",
+        nav: { description: "תיאור", services: "שירותים", contact: "צור קשר" },
+        form: { heading: "צור קשר", name: "שמך", email: "האימייל שלך", message: "ההודעה שלך...", send: "שלח" },
+        footer: "כל הזכויות שמורות.",
+        toast: "✅ נשלח, תודה!"
+      }
+    };
+
+    function switchLang(lang) {
+      const t = translations[lang];
+      document.documentElement.lang = t.lang;
+      document.documentElement.dir = t.dir;
+
+      document.getElementById('main-title').innerText = t.title;
+      document.getElementById('tagline').innerText = t.tagline;
+      document.getElementById('desc-text').innerText = t.description;
+      document.getElementById('services-text').innerText = t.services;
+
+      document.getElementById('nav-desc').innerText = t.nav.description;
+      document.getElementById('nav-serv').innerText = t.nav.services;
+      document.getElementById('nav-cont').innerText = t.nav.contact;
+
+      document.getElementById('form-heading').innerText = t.form.heading;
+      document.getElementById('name-field').placeholder = t.form.name;
+      document.getElementById('email-field').placeholder = t.form.email;
+      document.getElementById('message-field').placeholder = t.form.message;
+      document.getElementById('submit-button').innerText = t.form.send;
+
+      document.getElementById('footer-text').innerText = `© 2025 Rising Star Manager. ${t.footer}`;
+      document.getElementById('formSuccessToast').innerText = t.toast;
+    }
+
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      // Здесь можно добавить отправку формы на почту или сервер
+
+      const toast = document.getElementById("formSuccessToast");
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 4000);
+
+      this.reset();
+    });
+
+    // Инициализация языка по умолчанию — русский
+    switchLang('en');
+  </script>
+</body>
+</html>
