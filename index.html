@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Rising Star Manager — платформа для менеджмента соревнований" />
-  <meta name="keywords" content="менеджмент соревнований, регистрация, расписание, судейство, итоги, соревнования, sport management" />
+  <meta name="keywords" content="менеджмент соревнований, регистрация, расписание, судейство, итоги, соревнования, sport management, ristar, rising star, rising star manager, competition management, competition, israel" />
   <meta name="author" content="Rising Star Manager Team" />
   <meta name="theme-color" content="#0c57ab">
   <link rel="canonical" href="https://ristar.co/" />
@@ -102,49 +102,158 @@
       height: 100%;
     }
 
+    /* НОВЫЕ СТИЛИ ДЛЯ НАВИГАЦИИ */
     nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       background-color: #0c57ab;
-      padding: 10px 20px;
       z-index: 1000;
+    }
+
+    .nav-container {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px 20px;
       box-sizing: border-box;
     }
 
     .nav-left {
       display: flex;
       align-items: center;
-      flex-wrap: wrap;
+      gap: 20px;
     }
 
     .nav-left img {
       height: 40px;
-      margin-right: 15px;
+      cursor: pointer;
     }
 
-    .nav-left a {
+    .nav-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-links a {
       color: #fff;
-      margin-right: 15px;
       text-decoration: none;
       font-weight: bold;
       white-space: nowrap;
     }
 
-    .lang-switcher button {
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 1rem;
-      cursor: pointer;
-      margin-left: 10px;
-      padding: 5px;
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
 
+    .results-btn {
+      background-color: #fff;
+      color: #0c57ab;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .results-btn:hover {
+      background-color: #e6e6e6;
+    }
+
+    /* Стили для гамбургер-меню */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      margin: 5px 0;
+      transition: all 0.3s ease;
+    }
+
+    .no-scroll {
+      overflow: hidden;
+    }
+
+    /* Адаптивные стили для меню */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: #0c57ab;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        transition: right 0.3s ease;
+        z-index: 1000;
+        padding-top: 80px;
+      }
+      
+      .nav-links.active {
+        right: 0;
+      }
+      
+      /* Анимация гамбургера */
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+      
+      /* Затемнение фона */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      
+      .overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .results-btn {
+        display: none;
+      }
+    }
+
+    /* Остальные существующие стили */
     .div-start {
       background-color: #0c57ab;
       padding: 20px;
@@ -310,36 +419,8 @@
     }
 
     @media (max-width: 600px) {
-      nav {
-        padding: 10px 10px;
-        flex-wrap: wrap;
-      }
-
-      .nav-left {
-        width: 100%;
-        margin-bottom: 10px;
-        justify-content: center;
-      }
-
-      .nav-left a {
-        margin-right: 10px;
-        font-size: 0.9rem;
-      }
-
-      .nav-left img {
-        margin-bottom: 10px;
-        height: 35px;
-      }
-
-      .lang-switcher {
-        width: 100%;
-        text-align: center;
-      }
-
-      .lang-switcher button {
-        font-size: 0.9rem;
-        margin-left: 5px;
-        margin-right: 5px;
+      .nav-container {
+        padding: 10px 15px;
       }
 
       h1 {
@@ -378,29 +459,44 @@
     </div>
   </div>
 
+  <!-- НОВАЯ НАВИГАЦИЯ -->
   <nav>
-    <div class="nav-left">
-      <img src="logo-w.png" alt="Rising Star Manager Logo" />
-      <a id="nav-desc" href="#desc-text">Описание</a>
-      <a id="nav-serv" href="#services-text">Сервисы</a>
-      <a id="nav-cont" href="#contact-form">Контакты</a>
-    </div>
-    <div class="lang-switcher" aria-label="Language switcher">
-      <button onclick="switchLang('en')" aria-label="Switch to English">
-        <img src="https://flagcdn.com/w40/gb.png" alt="English" style="height: 20px; vertical-align: middle;" />
-        English
-      </button>
-      <button onclick="switchLang('ru')" aria-label="Switch to Russian">
-        <img src="https://flagcdn.com/w40/ru.png" alt="Русский" style="height: 20px; vertical-align: middle;" />
-        Русский
-      </button>
-      <button onclick="switchLang('he')" aria-label="Switch to Hebrew">
-        <img src="https://flagcdn.com/w40/il.png" alt="עברית" style="height: 20px; vertical-align: middle;" />
-        עברית
-      </button>
+    <div class="nav-container">
+      <div class="nav-left">
+        <img src="logo-w.png" alt="Rising Star Manager Logo" onclick="scrollToTop()" />
+        <div class="nav-links" id="navLinks">
+          <a id="nav-desc" href="#desc-text">Описание</a>
+          <a id="nav-serv" href="#services-text">Сервисы</a>
+          <a id="nav-cont" href="#contact-form">Контакты</a>
+        </div>
+      </div>
+      
+      <div class="nav-right">
+        <a href="https://results.ristar.co" class="results-btn" target="_blank">Результаты</a>
+        <div class="lang-switcher" aria-label="Language switcher">
+          <button onclick="switchLang('en')" aria-label="Switch to English">
+            <img src="https://flagcdn.com/w40/gb.png" alt="English" style="height: 20px; vertical-align: middle;" />
+            English
+          </button>
+          <button onclick="switchLang('ru')" aria-label="Switch to Russian">
+            <img src="https://flagcdn.com/w40/ru.png" alt="Русский" style="height: 20px; vertical-align: middle;" />
+            Русский
+          </button>
+          <button onclick="switchLang('he')" aria-label="Switch to Hebrew">
+            <img src="https://flagcdn.com/w40/il.png" alt="עברית" style="height: 20px; vertical-align: middle;" />
+            עברית
+          </button>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Меню" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
+  <!-- Остальное содержимое остается без изменений -->
   <header>
     <video autoplay muted loop playsinline class="video-bg" aria-hidden="true" tabindex="-1">
       <source src="header.mp4" type="video/mp4" />
@@ -490,7 +586,8 @@
         nav: { description: "Описание", services: "Сервисы", contact: "Контакты" },
         form: { heading: "Связаться с нами", name: "Ваше имя", email: "Ваш Email", message: "Ваше сообщение...", send: "Отправить" },
         footer: "Все права защищены.",
-        toast: "✅ Отправлено, спасибо!"
+        toast: "✅ Отправлено, спасибо!",
+        results: "Результаты"
       },
       en: {
         lang: "en", dir: "ltr",
@@ -510,7 +607,8 @@
         nav: { description: "Description", services: "Services", contact: "Contact" },
         form: { heading: "Contact Us", name: "Your Name", email: "Your Email", message: "Your Message...", send: "Send" },
         footer: "All rights reserved.",
-        toast: "✅ Sent, thank you!"
+        toast: "✅ Sent, thank you!",
+        results: "Results"
       },
       he: {
         lang: "he", dir: "rtl",
@@ -530,7 +628,8 @@
         nav: { description: "תיאור", services: "שירותים", contact: "צור קשר" },
         form: { heading: "צור קשר", name: "שמך", email: "האימייל שלך", message: "ההודעה שלך...", send: "שלח" },
         footer: "כל הזכויות שמורות.",
-        toast: "✅ נשלח, תודה!"
+        toast: "✅ נשלח, תודה!",
+        results: "תוצאות"
       }
     };
 
@@ -560,13 +659,67 @@
       document.getElementById('submit-button').innerText = t.form.send;
 
       document.getElementById('footer-text').innerText = `© 2025 Rising Star Manager. ${t.footer}`;
+      
+      // Обновляем текст кнопки результатов
+      const resultsBtn = document.querySelector('.results-btn');
+      if (resultsBtn) resultsBtn.innerText = t.results;
+    }
+
+    // Функция для скролла наверх
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     }
 
     // По умолчанию русский
     switchLang('ru');
 
-    // Улучшенный скрипт загрузки
     document.addEventListener('DOMContentLoaded', function() {
+      // Инициализация гамбургер-меню
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+      const body = document.body;
+      
+      // Создаем overlay для затемнения фона
+      const overlay = document.createElement('div');
+      overlay.className = 'overlay';
+      document.body.appendChild(overlay);
+      
+      hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        overlay.classList.toggle('active');
+        body.classList.toggle('no-scroll');
+        
+        // Обновляем aria-атрибуты для доступности
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+      });
+      
+      // Закрываем меню при клике на overlay
+      overlay.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        this.classList.remove('active');
+        body.classList.remove('no-scroll');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+      
+      // Закрываем меню при клике на ссылку
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function() {
+          if (window.innerWidth <= 768) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            overlay.classList.remove('active');
+            body.classList.remove('no-scroll');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+
       // Устанавливаем обработчик на полную загрузку страницы
       window.addEventListener('load', function() {
         const loader = document.getElementById('loader');
@@ -581,6 +734,7 @@
           // Удаляем лоадер из DOM после завершения анимации
           setTimeout(function() {
             loader.remove();
+            overlay.remove();
           }, 700);
         }
       });
@@ -595,6 +749,7 @@
             document.body.classList.add('loaded');
             setTimeout(function() {
               loader.remove();
+              overlay.remove();
             }, 700);
           }
         }
@@ -608,7 +763,7 @@
       const form = event.target;
       const data = new FormData(form);
       try {
-        const response = await fetch('https://formsubmit.co/ajax/risingstarco@gmail.com', {
+        const response = await fetch('https://formsubmit.co/ajax/2mmedia.il@gmail.com', {
           method: 'POST',
           body: data,
           headers: { 'Accept': 'application/json' }
