@@ -34,7 +34,7 @@
     #loader {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #fffff;
+      background-color: #0c57ab;
       color: white;
       display: flex;
       flex-direction: column;
@@ -47,6 +47,20 @@
     #loader.hidden {
       opacity: 0;
       pointer-events: none;
+    }
+
+    /* Скрытие контента до загрузки */
+    body.preload {
+      overflow: hidden;
+    }
+    body.preload > *:not(#loader) {
+      opacity: 0;
+      visibility: hidden;
+    }
+    body.loaded > *:not(#loader) {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
     .progress-bar {
@@ -76,19 +90,9 @@
     /* Плавность и анимации для всего сайта */
     html, body, nav, header, section, footer, .header-content, .nav-left a, .lang-switcher button, .contact-form input, .contact-form textarea, .contact-form button {
       transition: all 0.4s ease;
-      /* для плавности наведения, смены цвета и т.п. */
     }
 
-    body {
-  /*    opacity: 0;
-      transition: opacity 1s ease; */
-    }
-
-    body.loaded {
-      opacity: 1;
-    }
-
-    /* Остальной твой CSS */
+    /* Остальной CSS */
     html, body {
       margin: 0;
       padding: 0;
@@ -365,7 +369,7 @@
     }
   </style>
 </head>
-<body>
+<body class="preload">
   <!-- LOADER -->
   <div id="loader" role="alert" aria-live="assertive" aria-busy="true" aria-label="Загрузка сайта">
     <div>Загрузка...</div>
@@ -381,21 +385,20 @@
       <a id="nav-serv" href="#services-text">Сервисы</a>
       <a id="nav-cont" href="#contact-form">Контакты</a>
     </div>
-<div class="lang-switcher" aria-label="Language switcher">
-  <button onclick="switchLang('en')" aria-label="Switch to English">
-    <img src="https://flagcdn.com/w40/gb.png" alt="English" style="height: 20px; vertical-align: middle;" />
-    English
-  </button>
-  <button onclick="switchLang('ru')" aria-label="Switch to Russian">
-    <img src="https://flagcdn.com/w40/ru.png" alt="Русский" style="height: 20px; vertical-align: middle;" />
-    Русский
-  </button>
-  <button onclick="switchLang('he')" aria-label="Switch to Hebrew">
-    <img src="https://flagcdn.com/w40/il.png" alt="עברית" style="height: 20px; vertical-align: middle;" />
-    עברית
-  </button>
-</div>
-
+    <div class="lang-switcher" aria-label="Language switcher">
+      <button onclick="switchLang('en')" aria-label="Switch to English">
+        <img src="https://flagcdn.com/w40/gb.png" alt="English" style="height: 20px; vertical-align: middle;" />
+        English
+      </button>
+      <button onclick="switchLang('ru')" aria-label="Switch to Russian">
+        <img src="https://flagcdn.com/w40/ru.png" alt="Русский" style="height: 20px; vertical-align: middle;" />
+        Русский
+      </button>
+      <button onclick="switchLang('he')" aria-label="Switch to Hebrew">
+        <img src="https://flagcdn.com/w40/il.png" alt="עברית" style="height: 20px; vertical-align: middle;" />
+        עברית
+      </button>
+    </div>
   </nav>
 
   <header>
@@ -418,38 +421,36 @@
       </p>
     </div>
     <h2 id="services-title" style="text-align:center; margin-bottom:30px;">Как работает система</h2>
-<div style="display: flex; flex-direction: column; gap: 20px;">
-  <div style="display: flex; align-items: center; gap: 15px;">
-    <img src="https://img.icons8.com/color/48/handshake.png" alt="Договор" />
-    <span id="step-0">Заключаем договор и настраиваем систему под вас</span>
-  </div>
-  <div style="display: flex; align-items: center; gap: 15px;">
-    <img src="https://img.icons8.com/color/48/calendar.png" alt="Календарь" />
-    <span id="step-1">Создаём событие и открываем регистрацию</span>
-  </div>
-  <div style="display: flex; align-items: center; gap: 15px;">
-    <img src="https://img.icons8.com/color/48/add-user-group-man-man.png" alt="Регистрация" />
-    <span id="step-2">Участники регистрируются онлайн</span>
-  </div>
-  <div style="display: flex; align-items: center; gap: 15px;">
-    <img src="https://img.icons8.com/color/48/clock--v1.png" alt="Расписание" />
-    <span id="step-3">Формируем расписание и распределяем по категориям</span>
-  </div>
-  <div style="display: flex; align-items: center; gap: 15px;">
-    <img src="https://img.icons8.com/color/48/whistle.png" alt="Судейство" />
-    <span id="step-4">Судейство проводится в системе</span>
-  </div>
-  <div style="display: flex; align-items: center; gap: 15px;">
-    <img src="https://img.icons8.com/color/48/combo-chart--v1.png" alt="Результаты" />
-    <span id="step-5">Система считает и обновляет результаты в реальном времени</span>
-  </div>
-  <div style="display: flex; align-items: center; gap: 15px;">
-    <img src="https://img.icons8.com/color/48/share-rounded.png" alt="Публикация" />
-    <span id="step-6">Публикуем итоги и выдаём сертификаты</span>
-  </div>
-</div>
-</div>
-
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/handshake.png" alt="Договор" />
+        <span id="step-0">Заключаем договор и настраиваем систему под вас</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/calendar.png" alt="Календарь" />
+        <span id="step-1">Создаём событие и открываем регистрацию</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/add-user-group-man-man.png" alt="Регистрация" />
+        <span id="step-2">Участники регистрируются онлайн</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/clock--v1.png" alt="Расписание" />
+        <span id="step-3">Формируем расписание и распределяем по категориям</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/whistle.png" alt="Судейство" />
+        <span id="step-4">Судейство проводится в системе</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/combo-chart--v1.png" alt="Результаты" />
+        <span id="step-5">Система считает и обновляет результаты в реальном времени</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/share-rounded.png" alt="Публикация" />
+        <span id="step-6">Публикуем итоги и выдаём сертификаты</span>
+      </div>
+    </div>
 
     <div class="contact-form" id="contact-form">
       <h2 id="form-heading">Связаться с нами</h2>
@@ -471,43 +472,41 @@
 
   <script>
     const translations = {
-     ru: {
-  lang: "ru", dir: "ltr",
-  title: "Rising Star Manager",
-  tagline: "Ваши соревнования — наша система",
-  description: "Rising Star Manager — универсальный сервис для полного менеджмента соревнований.",
-  servicesTitle: "Как работает система",
-  servicesSteps: [
-    "Заключаем договор и настраиваем систему под вас",
-    "Создаём событие и открываем регистрацию",
-    "Участники регистрируются онлайн",
-    "Формируем расписание и распределяем по категориям",
-    "Судейство проводится в системе",
-    "Система считает и обновляет результаты в реальном времени",
-    "Публикуем итоги и выдаём сертификаты"
-  ],  // <-- здесь была нужна запятая
-
-  nav: { description: "Описание", services: "Сервисы", contact: "Контакты" },
-  form: { heading: "Связаться с нами", name: "Ваше имя", email: "Ваш Email", message: "Ваше сообщение...", send: "Отправить" },
-  footer: "Все права защищены.",
-  toast: "✅ Отправлено, спасибо!"
-},
-
+      ru: {
+        lang: "ru", dir: "ltr",
+        title: "Rising Star Manager",
+        tagline: "Ваши соревнования — наша система",
+        description: "Rising Star Manager — универсальный сервис для полного менеджмента соревнований.",
+        servicesTitle: "Как работает система",
+        servicesSteps: [
+          "Заключаем договор и настраиваем систему под вас",
+          "Создаём событие и открываем регистрацию",
+          "Участники регистрируются онлайн",
+          "Формируем расписание и распределяем по категориям",
+          "Судейство проводится в системе",
+          "Система считает и обновляет результаты в реальном времени",
+          "Публикуем итоги и выдаём сертификаты"
+        ],
+        nav: { description: "Описание", services: "Сервисы", contact: "Контакты" },
+        form: { heading: "Связаться с нами", name: "Ваше имя", email: "Ваш Email", message: "Ваше сообщение...", send: "Отправить" },
+        footer: "Все права защищены.",
+        toast: "✅ Отправлено, спасибо!"
+      },
       en: {
         lang: "en", dir: "ltr",
         title: "Rising Star Manager",
         tagline: "Your competition, our system",
         description: "Rising Star Manager is a full-service competition management platform.",
-servicesTitle: "How the system works",
-servicesSteps: [
-  "We sign a contract and configure the system for you",
-  "We create the event and open registration",
-  "Participants register online",
-  "We generate a schedule and distribute by categories",
-  "Judging is done within the system",
-  "The system calculates and updates results in real time",
-  "We publish final standings and issue certificates"
-]
+        servicesTitle: "How the system works",
+        servicesSteps: [
+          "We sign a contract and configure the system for you",
+          "We create the event and open registration",
+          "Participants register online",
+          "We generate a schedule and distribute by categories",
+          "Judging is done within the system",
+          "The system calculates and updates results in real time",
+          "We publish final standings and issue certificates"
+        ],
         nav: { description: "Description", services: "Services", contact: "Contact" },
         form: { heading: "Contact Us", name: "Your Name", email: "Your Email", message: "Your Message...", send: "Send" },
         footer: "All rights reserved.",
@@ -518,16 +517,16 @@ servicesSteps: [
         title: "Rising Star Manager",
         tagline: "התחרות שלכם – המערכת שלנו",
         description: "Rising Star Manager הוא שירות לניהול תחרויות מקצה לקצה.",
-servicesTitle: "איך המערכת פועלת",
-servicesSteps: [
-  "חותמים על חוזה ומגדירים את המערכת לפי הצרכים שלכם",
-  "יוצרים אירוע ופותחים את ההרשמה",
-  "המשתתפים נרשמים אונליין",
-  "יוצרים לוח זמנים ומחלקים לפי קטגוריות",
-  "השיפוט מתבצע במערכת",
-  "התוצאות מתעדכנות בזמן אמת",
-  "מפרסמים את התוצאות ומנפיקים תעודות"
-],
+        servicesTitle: "איך המערכת פועלת",
+        servicesSteps: [
+          "חותמים על חוזה ומגדירים את המערכת לפי הצרכים שלכם",
+          "יוצרים אירוע ופותחים את ההרשמה",
+          "המשתתפים נרשמים אונליין",
+          "יוצרים לוח זמנים ומחלקים לפי קטגוריות",
+          "השיפוט מתבצע במערכת",
+          "התוצאות מתעדכנות בזמן אמת",
+          "מפרסמים את התוצאות ומנפיקים תעודות"
+        ],
         nav: { description: "תיאור", services: "שירותים", contact: "צור קשר" },
         form: { heading: "צור קשר", name: "שמך", email: "האימייל שלך", message: "ההודעה שלך...", send: "שלח" },
         footer: "כל הזכויות שמורות.",
@@ -548,8 +547,7 @@ servicesSteps: [
       for (let i = 0; i < serviceSteps.length; i++) {
         const stepEl = document.getElementById(`step-${i}`);
         if (stepEl) stepEl.innerText = serviceSteps[i];
-    }
-
+      }
 
       document.getElementById('nav-desc').innerText = t.nav.description;
       document.getElementById('nav-serv').innerText = t.nav.services;
@@ -565,24 +563,43 @@ servicesSteps: [
     }
 
     // По умолчанию русский
-    switchLang('en');
+    switchLang('ru');
 
-    // Loader script
-    window.addEventListener('load', () => {
-  console.log('Страница загружена, скрываю лоадер');
-  const loader = document.getElementById('loader');
-  if (!loader) {
-    console.error('Loader не найден');
-    return;
-  }
-  document.body.classList.add('loaded');
-  loader.classList.add('hidden');
-  setTimeout(() => {
-    loader.style.display = 'none';
-    console.log('Лоадер скрыт');
-  }, 700);
-});
-
+    // Улучшенный скрипт загрузки
+    document.addEventListener('DOMContentLoaded', function() {
+      // Устанавливаем обработчик на полную загрузку страницы
+      window.addEventListener('load', function() {
+        const loader = document.getElementById('loader');
+        if (loader) {
+          // Добавляем класс для скрытия лоадера
+          loader.classList.add('hidden');
+          
+          // Добавляем класс для показа основного контента
+          document.body.classList.remove('preload');
+          document.body.classList.add('loaded');
+          
+          // Удаляем лоадер из DOM после завершения анимации
+          setTimeout(function() {
+            loader.remove();
+          }, 700);
+        }
+      });
+      
+      // Fallback на случай если событие load не сработает
+      setTimeout(function() {
+        if (document.body.classList.contains('preload')) {
+          const loader = document.getElementById('loader');
+          if (loader) {
+            loader.classList.add('hidden');
+            document.body.classList.remove('preload');
+            document.body.classList.add('loaded');
+            setTimeout(function() {
+              loader.remove();
+            }, 700);
+          }
+        }
+      }, 5000); // Максимальное время ожидания 5 секунд
+    });
 
     // Обработка формы
     document.getElementById('contactForm').addEventListener('submit', async function(event) {
@@ -612,4 +629,3 @@ servicesSteps: [
   </script>
 </body>
 </html>
-исправь его полностью
