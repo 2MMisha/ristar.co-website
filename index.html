@@ -80,8 +80,8 @@
     }
 
     body {
-      opacity: 0;
-      transition: opacity 1s ease;
+  /*    opacity: 0;
+      transition: opacity 1s ease; */
     }
 
     body.loaded {
@@ -471,27 +471,28 @@
 
   <script>
     const translations = {
-      ru: {
-        lang: "ru", dir: "ltr",
-        title: "Rising Star Manager",
-        tagline: "Ваши соревнования — наша система",
-        description: "Rising Star Manager — универсальный сервис для полного менеджмента соревнований.",
-        servicesTitle: "Как работает система",
-servicesSteps: [
-  "Заключаем договор и настраиваем систему под вас",
-  "Создаём событие и открываем регистрацию",
-  "Участники регистрируются онлайн",
-  "Формируем расписание и распределяем по категориям",
-  "Судейство проводится в системе",
-  "Система считает и обновляет результаты в реальном времени",
-  "Публикуем итоги и выдаём сертификаты"
-]
+     ru: {
+  lang: "ru", dir: "ltr",
+  title: "Rising Star Manager",
+  tagline: "Ваши соревнования — наша система",
+  description: "Rising Star Manager — универсальный сервис для полного менеджмента соревнований.",
+  servicesTitle: "Как работает система",
+  servicesSteps: [
+    "Заключаем договор и настраиваем систему под вас",
+    "Создаём событие и открываем регистрацию",
+    "Участники регистрируются онлайн",
+    "Формируем расписание и распределяем по категориям",
+    "Судейство проводится в системе",
+    "Система считает и обновляет результаты в реальном времени",
+    "Публикуем итоги и выдаём сертификаты"
+  ],  // <-- здесь была нужна запятая
 
-        nav: { description: "Описание", services: "Сервисы", contact: "Контакты" },
-        form: { heading: "Связаться с нами", name: "Ваше имя", email: "Ваш Email", message: "Ваше сообщение...", send: "Отправить" },
-        footer: "Все права защищены.",
-        toast: "✅ Отправлено, спасибо!"
-      },
+  nav: { description: "Описание", services: "Сервисы", contact: "Контакты" },
+  form: { heading: "Связаться с нами", name: "Ваше имя", email: "Ваш Email", message: "Ваше сообщение...", send: "Отправить" },
+  footer: "Все права защищены.",
+  toast: "✅ Отправлено, спасибо!"
+},
+
       en: {
         lang: "en", dir: "ltr",
         title: "Rising Star Manager",
@@ -567,12 +568,12 @@ servicesSteps: [
     switchLang('en');
 
     // Loader script
-    window.addEventListener('load', () => {
-      const loader = document.getElementById('loader');
-      document.body.classList.add('loaded');
-      loader.classList.add('hidden');
-      setTimeout(() => loader.style.display = 'none', 700);
-    });
+//    window.addEventListener('load', () => {
+//      const loader = document.getElementById('loader');
+//      document.body.classList.add('loaded');
+//      loader.classList.add('hidden');
+//      setTimeout(() => loader.style.display = 'none', 700);
+//    });
 
     // Обработка формы
     document.getElementById('contactForm').addEventListener('submit', async function(event) {
