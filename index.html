@@ -524,6 +524,7 @@
       <div class="nav-links">
         <a href="index.html" class="nav-link" id="nav-home">Home</a>
         <a href="contact.html" class="nav-link" id="nav-contact">Contact</a>
+        <a href="pitch.html" class="nav-link" id="nav-pitch">Pitching Presentations</a>
         <a href="https://results.ristar.co" class="nav-btn" target="_blank" id="nav-results">Results</a>
         <a href="https://registration.ristar.co" class="nav-btn" target="_blank" id="nav-register">Register</a>
         
@@ -551,6 +552,7 @@
         <div class="mobile-menu-content">
           <a href="index.html" class="mobile-link" id="mobile-home">Home</a>
           <a href="contact.html" class="mobile-link" id="mobile-contact">Contact</a>
+          <a href="pitch.html" class="mobile-link" id="mobile-pitch">Pitching Presentation</a>
           <a href="https://results.ristar.co" class="mobile-btn" target="_blank" id="mobile-results">Results</a>
           <a href="https://registration.ristar.co" class="mobile-btn" target="_blank" id="mobile-register">Register</a>
           
@@ -646,6 +648,28 @@
   </footer>
 
   <script>
+    // Simplified loader hiding logic
+    function hideLoader() {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.classList.add('hidden');
+        document.body.classList.remove('preload');
+        document.body.classList.add('loaded');
+        
+        setTimeout(() => {
+          loader.remove();
+          document.getElementById('overlay').style.display = 'none';
+        }, 700);
+      }
+    }
+
+    // Try to hide loader when page is fully loaded
+    window.addEventListener('load', hideLoader);
+
+    // Fallback in case load event doesn't fire
+    setTimeout(hideLoader, 2000);
+
+    // Rest of your existing JavaScript code...
     const translations = {
       ru: {
         lang: "ru", dir: "ltr",
@@ -665,6 +689,7 @@
         nav: { 
           home: "Главная", 
           contact: "Контакты",
+          pitch: "Презентация",
           results: "Результаты",
           register: "Регистрация"
         },
@@ -697,6 +722,7 @@
         nav: { 
           home: "Home", 
           contact: "Contact",
+          pitch: "Pitching Presentations",
           results: "Results",
           register: "Register"
         },
@@ -729,6 +755,7 @@
         nav: { 
           home: "בית", 
           contact: "יצירת קשר",
+          pitch: "פרזנטציה",
           results: "תוצאות",
           register: "הרשמה"
         },
@@ -775,12 +802,14 @@
       // Update navigation
       document.getElementById('nav-home').innerText = t.nav.home;
       document.getElementById('nav-contact').innerText = t.nav.contact;
+      document.getElementById('nav-pitch').innerText = t.nav.pitch;
       document.getElementById('nav-results').innerText = t.nav.results;
       document.getElementById('nav-register').innerText = t.nav.register;
 
       // Update mobile navigation
       document.getElementById('mobile-home').innerText = t.nav.home;
       document.getElementById('mobile-contact').innerText = t.nav.contact;
+      document.getElementById('mobile-pitch').innerText = t.nav.pitch;
       document.getElementById('mobile-results').innerText = t.nav.results;
       document.getElementById('mobile-register').innerText = t.nav.register;
 
@@ -837,20 +866,6 @@
         });
       });
 
-      // Lazy load video
-      const video = document.querySelector('.video-bg');
-      const videoObserver = new IntersectionObserver((entries) => {
-        if(entries[0].isIntersecting) {
-          video.querySelectorAll('source').forEach(source => {
-            source.src = source.getAttribute('data-src') || source.src;
-          });
-          video.load();
-          videoObserver.unobserve(video);
-        }
-      }, {threshold: 0.1});
-
-      videoObserver.observe(video);
-
       // Form handling
       document.getElementById('contactForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -875,38 +890,6 @@
           alert('Form submission error');
         }
       });
-
-      // Page load completion
-      window.addEventListener('load', function() {
-        const loader = document.getElementById('loader');
-        if (loader) {
-          loader.classList.add('hidden');
-          document.body.classList.remove('preload');
-          document.body.classList.add('loaded');
-          
-          // Remove loader and hide overlay
-          setTimeout(() => {
-            loader.remove();
-            overlay.style.display = 'none';
-          }, 700);
-        }
-      });
-
-      // Loader fallback
-      setTimeout(function() {
-        if (document.body.classList.contains('preload')) {
-          const loader = document.getElementById('loader');
-          if (loader) {
-            loader.classList.add('hidden');
-            document.body.classList.remove('preload');
-            document.body.classList.add('loaded');
-            setTimeout(() => {
-              loader.remove();
-              overlay.style.display = 'none';
-            }, 700);
-          }
-        }
-      }, 5000);
     });
   </script>
 </body>
