@@ -1,35 +1,65 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Rising Star Manager — competition management platform" />
-  <meta name="author" content="Rising Star Manager Team" />
-  <meta name="theme-color" content="#0c57ab">
-  <link rel="canonical" href="https://ristar.co/" />
-
-  <!-- ICON -->
-  <link rel="icon" href="icon.ico" type="image/x-icon" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Rising Star Manager" />
-  <meta property="og:description" content="Competition management platform. Registration, scheduling, judging and more." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://ristar.co/" />
-  <meta property="og:image" content="https://ristar.co/og-image.png" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Rising Star Manager" />
-  <meta name="twitter:description" content="Competition management platform. Registration, scheduling, judging and more." />
-  <meta name="twitter:image" content="https://ristar.co/twitter-image.png" />
-
-  <title>Rising Star Manager</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Rising Star Manager</title>
   <style>
-        /* Добавленные стили для модального окна скидок */
+    /* Discount Banner Styles */
+    .discount-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, #0c57ab, #28a745);
+      color: white;
+      padding: 15px 20px;
+      z-index: 1000;
+      box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .discount-banner-content {
+      flex: 1;
+    }
+    
+    .discount-banner-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+    }
+    
+    .discount-banner-text {
+      font-size: 0.9rem;
+    }
+    
+    .discount-banner-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      margin-left: 15px;
+    }
+    
+    .discount-banner-button {
+      background: white;
+      color: #0c57ab;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      margin-left: 15px;
+      white-space: nowrap;
+    }
+    
+    .discount-banner-button:hover {
+      background: #e6e6e6;
+    }
+    
+    /* Discount Modal Styles */
     .discount-modal {
       position: fixed;
       top: 50%;
@@ -131,477 +161,15 @@
       .discount-percent {
         font-size: 26px;
       }
-    }
-    /* LOADER */
-    #loader {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #0c57ab;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      opacity: 1;
-      transition: opacity 0.7s ease;
-    }
-    #loader.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* Hide content before load */
-    body.preload {
-      overflow: hidden;
-    }
-    body.preload > *:not(#loader) {
-      opacity: 0;
-      visibility: hidden;
-    }
-    body.loaded > *:not(#loader) {
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-
-    .progress-bar {
-      width: 80%;
-      max-width: 400px;
-      height: 8px;
-      background: rgba(255,255,255,0.3);
-      border-radius: 4px;
-      overflow: hidden;
-      margin-top: 15px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.4);
-    }
-
-    .progress-bar-inner {
-      height: 100%;
-      width: 0;
-      background: #fff;
-      border-radius: 4px;
-      animation: progressLoad 3s linear forwards;
-    }
-
-    @keyframes progressLoad {
-      0% { width: 0; }
-      100% { width: 100%; }
-    }
-
-    /* Main styles */
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Arimo', 'Montserrat', sans-serif;
-      background-color: #0c57ab;
-      color: #fff;
-      height: 100%;
-    }
-
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: #0c57ab;
-      z-index: 1000;
-      padding: 10px 20px;
-      box-sizing: border-box;
-    }
-
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .nav-brand img {
-      height: 40px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .nav-brand img:hover {
-      transform: scale(1.05);
-    }
-
-    /* Navigation links */
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .nav-link {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      white-space: nowrap;
-      padding: 8px 12px;
-      border-radius: 5px;
-      transition: background 0.3s ease;
-    }
-
-    .nav-link:hover {
-      background: rgba(255,255,255,0.1);
-    }
-
-    /* Buttons */
-    .nav-btn {
-      background: white;
-      color: #0c57ab;
-      padding: 8px 15px;
-      border-radius: 5px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-
-    .nav-btn:hover {
-      background: #e6e6e6;
-    }
-
-    /* Language buttons */
-    .lang-buttons {
-      display: flex;
-      gap: 5px;
-      margin-left: 15px;
-    }
-    
-    .lang-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 5px;
-    }
-    
-    .lang-btn img {
-      width: 24px;
-      height: 16px;
-      border-radius: 2px;
-      transition: transform 0.2s;
-    }
-    
-    .lang-btn:hover img {
-      transform: scale(1.1);
-    }
-
-    /* Hamburger menu */
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 5px;
-      z-index: 1001;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background: #fff;
-      margin: 5px 0;
-      transition: all 0.3s ease;
-    }
-
-    /* Mobile menu */
-    .mobile-menu {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 80%;
-      max-width: 300px;
-      height: 100vh;
-      background: #0c57ab;
-      z-index: 1000;
-      transition: right 0.3s ease;
-      padding-top: 70px;
-      box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-    }
-
-    .mobile-menu.active {
-      right: 0;
-    }
-
-    .mobile-menu-content {
-      display: flex;
-      flex-direction: column;
-      height: calc(100% - 70px);
-      padding: 20px;
-    }
-
-    .mobile-link {
-      color: white;
-      padding: 15px 0;
-      text-decoration: none;
-      font-size: 1.1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .mobile-btn {
-      background: white;
-      color: #0c57ab;
-      margin: 15px 0;
-      border-radius: 5px;
-      text-align: center;
-      font-weight: bold;
-      padding: 12px;
-    }
-
-    /* Language buttons in mobile menu */
-    .mobile-lang-switcher {
-      margin-top: auto;
-      padding-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    /* Overlay */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-    
-    .overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* Hide overlay after load */
-    body.loaded .overlay {
-      display: none;
-    }
-
-    /* Hamburger animations */
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-
-    /* Other styles */
-    .div-start {
-      background-color: #0c57ab;
-      padding: 20px;
-      border-radius: 10px;
-      display: inline-block;
-    }
-
-    header {
-      position: relative;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .video-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-    }
-
-    .header-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(12, 87, 171, 0.3);
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 30px 20px;
-      box-sizing: border-box;
-    }
-
-    .logo {
-      max-height: 80px;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-
-    .tagline {
-      font-size: 1.5rem;
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: 6px;
-      max-width: 600px;
-    }
-
-    section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: 100px auto 40px auto;
-      background: #fff;
-      color: #1c1c1c;
-      border-radius: 12px;
-      box-sizing: border-box;
-    }
-
-    .description, .services {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-
-    .contact-form {
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .contact-form h2 {
-      margin-bottom: 20px;
-      color: #0c57ab;
-    }
-
-    .contact-form form {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-
-    .contact-form button {
-      padding: 12px 24px;
-      background-color: #0c57ab;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .contact-form button:hover,
-    .contact-form button:focus {
-      background-color: #094a7a;
-      outline: none;
-    }
-
-    .form-success-toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #28a745;
-      color: #fff;
-      padding: 15px 20px;
-      border-radius: 8px;
-      font-size: 1rem;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
-      z-index: 9999;
-      display: none;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .form-success-toast.show {
-      display: block;
-      opacity: 1;
-    }
-
-    footer {
-      background-color: #0c57ab;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #fff;
-    }
-
-    .no-scroll {
-      overflow: hidden;
-    }
-
-    /* Responsiveness */
-    @media (max-width: 900px) {
-      section {
-        margin: 80px 15px 30px 15px;
-        padding: 30px 15px;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      .tagline {
-        font-size: 1.3rem;
-        max-width: 100%;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hamburger {
-        display: block;
+      
+      .discount-banner {
+        flex-direction: column;
+        text-align: center;
       }
       
-      .nav-links {
-        display: none;
-      }
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      .tagline {
-        font-size: 1rem;
-        padding: 8px;
-      }
-
-      section {
-        margin: 80px 10px 20px 10px;
-        padding: 20px 15px;
-      }
-
-      .contact-form input,
-      .contact-form textarea {
-        font-size: 0.9rem;
-        padding: 10px;
-      }
-
-      .contact-form button {
-        padding: 10px 20px;
-        font-size: 0.9rem;
+      .discount-banner-button {
+        margin-top: 10px;
+        margin-left: 0;
       }
     }
   </style>
@@ -614,25 +182,6 @@
       <div class="progress-bar-inner"></div>
     </div>
   </div>
-
-  <div style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden;">
-  <h1>Rising Star Manager — управление конкурсами</h1>
-  <p>Онлайн-платформа для организации музыкальных, танцевальных и спортивных соревнований в Израиле и по всему миру. Простая регистрация участников, расписание, система судейства на планшетах, публикация результатов и управление конкурсами.</p>
-  <p>Регистрация на конкурсы, голосование судей, интерфейс на английском, иврите и русском языках. Подходит для организаторов мероприятий любого масштаба: от местных школьных соревнований до международных фестивалей.</p>
-  <p>Competition registration platform for events in Israel and internationally. Judges' tablets, real-time results, schedule, multi-language support (EN, HE, RU). For dance, music, and sports competitions.</p>
-  <p>רישום לתחרויות מוזיקה, ריקוד וספורט בישראל. ניהול שופטים, טבלאות ניקוד, תוצאות בזמן אמת. תמיכה מלאה בעברית, אנגלית ורוסית. Rising Star Manager.</p>
-  <ul>
-    <li>Управление конкурсами</li>
-    <li>Платформа судейства</li>
-    <li>Онлайн-регистрация</li>
-    <li>Расписание мероприятий</li>
-    <li>Живая система баллов</li>
-    <li>Rising Star competition system</li>
-    <li>ניהול תחרויות</li>
-    <li>Судейство на планшетах</li>
-    <li>Competition management system</li>
-  </ul>
-</div>
 
   <!-- NAVIGATION -->
   <nav>
@@ -768,6 +317,16 @@
     <div id="footer-text">© 2025 Rising Star Manager. All rights reserved.</div>
   </footer>
 
+  <!-- Discount Banner -->
+  <div class="discount-banner" id="discountBanner">
+    <div class="discount-banner-content">
+      <div class="discount-banner-title" id="discountBannerTitle">SPECIAL OFFER: 55% discount for new customers!</div>
+      <div class="discount-banner-text" id="discountBannerText">35% discount if you switch from another service with less than 30 days remaining. All discounts stack!</div>
+    </div>
+    <a href="contact.html" class="discount-banner-button" id="discountBannerButton">Contact Us</a>
+    <button class="discount-banner-close" id="discountBannerClose">&times;</button>
+  </div>
+
   <script>
     // Simplified loader hiding logic
     function hideLoader() {
@@ -823,7 +382,24 @@
           send: "Отправить" 
         },
         footer: "Все права защищены.",
-        toast: "✅ Отправлено, спасибо!"
+        toast: "✅ Отправлено, спасибо!",
+        discount: {
+          modalTitle: "🔥 ОГРОМНЫЕ СКИДКИ ДЛЯ НОВЫХ КЛИЕНТОВ! 🔥",
+          modalItems: [
+            {
+              percent: "55% СКИДКА",
+              text: "Для новых клиентов при первом заказе нашей системы управления конкурсами!"
+            },
+            {
+              percent: "35% СКИДКА",
+              text: "Если вы переходите к нам от другого сервиса и до окончания текущего контракта осталось менее 30 дней!"
+            }
+          ],
+          modalNote: "⚡ ВСЕ СКИДКИ <span class='discount-highlight'>СКЛАДЫВАЮТСЯ</span>! ⚡<br>Предложение действительно ограниченное время!",
+          bannerTitle: "СПЕЦИАЛЬНОЕ ПРЕДЛОЖЕНИЕ: скидка 55% для новых клиентов!",
+          bannerText: "Скидка 35% при переходе от другого сервиса с оставшимся сроком менее 30 дней. Все скидки суммируются!",
+          bannerButton: "Связаться с нами"
+        }
       },
       en: {
         lang: "en", dir: "ltr",
@@ -856,7 +432,24 @@
           send: "Send" 
         },
         footer: "All rights reserved.",
-        toast: "✅ Sent, thank you!"
+        toast: "✅ Sent, thank you!",
+        discount: {
+          modalTitle: "🔥 HUGE DISCOUNTS FOR NEW CUSTOMERS! 🔥",
+          modalItems: [
+            {
+              percent: "55% DISCOUNT",
+              text: "For new customers on their first order of our competition management system!"
+            },
+            {
+              percent: "35% DISCOUNT",
+              text: "If you're switching from another service with less than 30 days remaining on your current contract!"
+            }
+          ],
+          modalNote: "⚡ ALL DISCOUNTS <span class='discount-highlight'>STACK</span>! ⚡<br>Limited time offer!",
+          bannerTitle: "SPECIAL OFFER: 55% discount for new customers!",
+          bannerText: "35% discount if you switch from another service with less than 30 days remaining. All discounts stack!",
+          bannerButton: "Contact Us"
+        }
       },
       he: {
         lang: "he", dir: "rtl",
@@ -889,7 +482,24 @@
           send: "שלח" 
         },
         footer: "כל הזכויות שמורות.",
-        toast: "✅ נשלח, תודה!"
+        toast: "✅ נשלח, תודה!",
+        discount: {
+          modalTitle: "🔥 הנחות ענק ללקוחות חדשים! 🔥",
+          modalItems: [
+            {
+              percent: "55% הנחה",
+              text: "ללקוחות חדשים בהזמנה הראשונה של מערכת ניהול התחרויות שלנו!"
+            },
+            {
+              percent: "35% הנחה",
+              text: "אם אתם עוברים אלינו מספק אחר עם פחות מ-30 ימים נותרים בחוזה הנוכחי!"
+            }
+          ],
+          modalNote: "⚡ כל ההנחות <span class='discount-highlight'>מצטברות</span>! ⚡<br>הצעה לזמן מוגבל!",
+          bannerTitle: "הצעה מיוחדת: 55% הנחה ללקוחות חדשים!",
+          bannerText: "35% הנחה אם עוברים מספק אחר עם פחות מ-30 ימים נותרים. כל ההנחות מצטברות!",
+          bannerButton: "יצירת קשר"
+        }
       }
     };
 
@@ -901,11 +511,51 @@
       return 'en'; // default to English
     }
 
+    function showDiscountModal() {
+      const overlay = document.createElement('div');
+      overlay.className = 'discount-overlay';
+      
+      const modal = document.createElement('div');
+      modal.className = 'discount-modal';
+      
+      const currentLang = document.documentElement.lang || 'en';
+      const t = translations[currentLang].discount;
+      
+      modal.innerHTML = `
+        <button class="discount-close" aria-label="Close discount modal">&times;</button>
+        <div class="discount-title">${t.modalTitle}</div>
+        
+        ${t.modalItems.map(item => `
+          <div class="discount-item">
+            <span class="discount-percent">${item.percent}</span>
+            ${item.text}
+          </div>
+        `).join('')}
+        
+        <div class="discount-note">${t.modalNote}</div>
+      `;
+      
+      document.body.appendChild(overlay);
+      document.body.appendChild(modal);
+      
+      // Close modal
+      modal.querySelector('.discount-close').addEventListener('click', function() {
+        document.body.removeChild(overlay);
+        document.body.removeChild(modal);
+      });
+      
+      // Close when clicking outside
+      overlay.addEventListener('click', function() {
+        document.body.removeChild(overlay);
+        document.body.removeChild(modal);
+      });
+    }
+
     function switchLang(lang) {
       const t = translations[lang];
       document.documentElement.lang = t.lang;
       document.documentElement.dir = t.dir;
-      document.title = t.title;
+      document.title = t.title + " - Contact Us";
 
       // Update main content
       document.getElementById('main-title').innerText = t.title;
@@ -944,12 +594,31 @@
 
       // Update footer
       document.getElementById('footer-text').innerText = `© 2025 Rising Star Manager. ${t.footer}`;
+      
+      // Update discount banner
+      document.getElementById('discountBannerTitle').innerText = t.discount.bannerTitle;
+      document.getElementById('discountBannerText').innerText = t.discount.bannerText;
+      document.getElementById('discountBannerButton').innerText = t.discount.bannerButton;
     }
 
     // Initialize after DOM loads
     document.addEventListener('DOMContentLoaded', function() {
       // Set language based on user preference
-      switchLang(detectLanguage());
+      const lang = detectLanguage();
+      switchLang(lang);
+
+      // Show discount modal after 1.5 seconds if not shown before
+      if (!localStorage.getItem('discountModalShown')) {
+        setTimeout(() => {
+          showDiscountModal();
+          localStorage.setItem('discountModalShown', 'true');
+        }, 1500);
+      }
+
+      // Close discount banner
+      document.getElementById('discountBannerClose').addEventListener('click', function() {
+        document.getElementById('discountBanner').style.display = 'none';
+      });
 
       // Menu management
       const hamburger = document.getElementById('hamburger');
