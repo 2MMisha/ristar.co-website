@@ -30,6 +30,109 @@
   <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
+        /* Добавленные стили для модального окна скидок */
+    .discount-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #0c57ab, #28a745);
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      z-index: 2000;
+      max-width: 90%;
+      width: 500px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      animation: modalAppear 0.5s ease-out;
+      text-align: center;
+    }
+    
+    .discount-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 1999;
+      backdrop-filter: blur(5px);
+    }
+    
+    .discount-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .discount-title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .discount-item {
+      background: rgba(255,255,255,0.15);
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    
+    .discount-percent {
+      font-size: 32px;
+      font-weight: bold;
+      color: #ffcc00;
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    .discount-note {
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #ffcc00;
+    }
+    
+    .discount-highlight {
+      background: rgba(255,255,255,0.2);
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+    
+    @keyframes modalAppear {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .discount-modal {
+        width: 90%;
+        padding: 20px;
+      }
+      
+      .discount-title {
+        font-size: 22px;
+      }
+      
+      .discount-percent {
+        font-size: 26px;
+      }
+    }
     /* LOADER */
     #loader {
       position: fixed;
