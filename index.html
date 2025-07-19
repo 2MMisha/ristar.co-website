@@ -230,6 +230,58 @@
       100% { width: 100%; }
     }
 
+    /* CTA Button Styles */
+    .cta-button {
+      display: inline-block;
+      background: white;
+      color: #0c57ab;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 1rem;
+      border: 2px solid white;
+    }
+    
+    .cta-button:hover {
+      background: transparent;
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    
+    .cta-button.secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      margin-left: 15px;
+    }
+    
+    .cta-button.secondary:hover {
+      background: white;
+      color: #0c57ab;
+    }
+    
+    .cta-section {
+      text-align: center;
+      margin: 40px 0;
+    }
+    
+    .cta-section h2 {
+      color: #0c57ab;
+      margin-bottom: 20px;
+    }
+    
+    .cta-section p {
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
     /* Main styles */
     html, body {
       margin: 0;
@@ -608,6 +660,16 @@
         font-size: 1.3rem;
         max-width: 100%;
       }
+      
+      .cta-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .cta-button.secondary {
+        margin-left: 0;
+      }
     }
 
     @media (max-width: 768px) {
@@ -642,6 +704,11 @@
       }
 
       .contact-form button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+      
+      .cta-button {
         padding: 10px 20px;
         font-size: 0.9rem;
       }
@@ -749,6 +816,12 @@
         <img src="logo-w.png" alt="Rising Star Manager Logo" class="logo" />
         <h1 id="main-title">Rising Star Manager</h1>
         <div class="tagline" id="tagline">Your competition, our system</div>
+        
+        <!-- Header CTA Buttons -->
+        <div class="cta-buttons">
+          <a href="contact.html" class="cta-button" id="header-cta-primary">Get Started</a>
+          <a href="contact.html" class="cta-button secondary" id="header-cta-secondary">Learn More</a>
+        </div>
       </div>
     </div>
   </header>
@@ -789,6 +862,13 @@
         <img src="https://img.icons8.com/color/48/share-rounded.png" alt="Publishing" />
         <span id="step-6">We publish final standings and issue certificates</span>
       </div>
+    </div>
+    
+    <!-- CTA Section after "How it works" -->
+    <div class="cta-section">
+      <h2 id="cta-title">Ready to transform your competition?</h2>
+      <p id="cta-text">Contact us today to learn how Rising Star Manager can streamline your event management process.</p>
+      <a href="contact.html" class="cta-button" id="main-cta-button">Request a Demo</a>
     </div>
 
     <div class="contact-form">
@@ -874,6 +954,13 @@
           message: "Ваше сообщение...", 
           send: "Отправить" 
         },
+        cta: {
+          headerPrimary: "Начать",
+          headerSecondary: "Подробнее",
+          sectionTitle: "Готовы преобразовать ваши соревнования?",
+          sectionText: "Свяжитесь с нами сегодня, чтобы узнать, как Rising Star Manager может упростить процесс организации вашего мероприятия.",
+          sectionButton: "Запросить демо"
+        },
         footer: "Все права защищены.",
         toast: "✅ Отправлено, спасибо!",
         discount: {
@@ -924,6 +1011,13 @@
           message: "Your Message...", 
           send: "Send" 
         },
+        cta: {
+          headerPrimary: "Get Started",
+          headerSecondary: "Learn More",
+          sectionTitle: "Ready to transform your competition?",
+          sectionText: "Contact us today to learn how Rising Star Manager can streamline your event management process.",
+          sectionButton: "Request a Demo"
+        },
         footer: "All rights reserved.",
         toast: "✅ Sent, thank you!",
         discount: {
@@ -973,6 +1067,13 @@
           email: "האימייל שלך", 
           message: "ההודעה שלך...", 
           send: "שלח" 
+        },
+        cta: {
+          headerPrimary: "התחל עכשיו",
+          headerSecondary: "למידע נוסף",
+          sectionTitle: "מוכנים לשדרג את התחרות שלכם?",
+          sectionText: "צרו איתנו קשר היום כדי ללמוד איך Rising Star Manager יכול לפשט את תהליך ניהול האירועים שלכם.",
+          sectionButton: "בקשו הדגמה"
         },
         footer: "כל הזכויות שמורות.",
         toast: "✅ נשלח, תודה!",
@@ -1094,6 +1195,13 @@
       document.getElementById('discountBannerTitle').innerText = t.discount.bannerTitle;
       document.getElementById('discountBannerText').innerText = t.discount.bannerText;
       document.getElementById('discountBannerButton').innerText = t.discount.bannerButton;
+      
+      // Update CTA buttons
+      document.getElementById('header-cta-primary').innerText = t.cta.headerPrimary;
+      document.getElementById('header-cta-secondary').innerText = t.cta.headerSecondary;
+      document.getElementById('cta-title').innerText = t.cta.sectionTitle;
+      document.getElementById('cta-text').innerText = t.cta.sectionText;
+      document.getElementById('main-cta-button').innerText = t.cta.sectionButton;
     }
 
     // Initialize after DOM loads
