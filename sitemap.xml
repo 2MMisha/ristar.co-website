@@ -9,22 +9,52 @@
 
 <url>
   <loc>https://www.ristar.co/</loc>
-  <lastmod>2025-07-18T16:09:26+00:00</lastmod>
+  <lastmod>2025-08-10T00:24:37+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://www.ristar.co/index.html</loc>
-  <lastmod>2025-07-18T16:09:26+00:00</lastmod>
+  <loc>https://www.ristar.co/en/index.html</loc>
+  <lastmod>2025-08-10T00:24:37+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.ristar.co/contact.html</loc>
-  <lastmod>2025-07-18T16:09:26+00:00</lastmod>
+  <loc>https://www.ristar.co/en/contact.html</loc>
+  <lastmod>2025-08-10T00:24:37+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.ristar.co/pitch.html</loc>
-  <lastmod>2025-07-18T16:09:26+00:00</lastmod>
+  <loc>https://www.ristar.co/en/pitch.html</loc>
+  <lastmod>2025-08-10T00:24:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.ristar.co/ru/index.html</loc>
+  <lastmod>2025-08-10T00:24:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.ristar.co/ru/contact.html</loc>
+  <lastmod>2025-08-10T00:24:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.ristar.co/ru/pitch.html</loc>
+  <lastmod>2025-08-10T00:24:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.ristar.co/he/index.html</loc>
+  <lastmod>2025-08-10T00:24:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.ristar.co/he/contact.html</loc>
+  <lastmod>2025-08-10T00:24:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.ristar.co/he/pitch.html</loc>
+  <lastmod>2025-08-10T00:24:37+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 
