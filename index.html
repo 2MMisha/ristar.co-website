@@ -3,35 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index, follow">
-    <meta name="revisit-after" content="7 days">
-    <link rel="canonical" href="https://ristar.co/" />
-    
-    <!-- Primary Meta Tags -->
-    <title>Rising Star Manager - Language Selection</title>
-    <meta name="title" content="Rising Star Manager - Language Selection">
-    <meta name="description" content="Select your preferred language for Rising Star Manager competition platform">
-    <meta name="keywords" content="rising star, competition manager, language selection, choose language, ristar">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ristar.co/">
-    <meta property="og:title" content="Rising Star Manager - Language Selection">
-    <meta property="og:description" content="Select your preferred language for Rising Star Manager competition platform">
-    <meta property="og:image" content="https://ristar.co/images/og-image.jpg">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://ristar.co/">
-    <meta property="twitter:title" content="Rising Star Manager - Language Selection">
-    <meta property="twitter:description" content="Select your preferred language for Rising Star Manager competition platform">
-    <meta property="twitter:image" content="https://ristar.co/images/twitter-image.jpg">
-    
+    <title>Rising Star Manager - Redirecting</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
             background-color: #0c57ab;
             color: white;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -39,230 +16,78 @@
             margin: 0;
             text-align: center;
         }
-        
-        .language-container {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
         }
-        
-        h1 {
-            margin-bottom: 30px;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        
-        .language-option {
-            margin: 20px 0;
-            font-size: 1.2em;
-        }
-        
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .confirm-btn {
-            background-color: #28a745;
-            color: white;
-        }
-        
-        .change-btn {
-            background-color: #dc3545;
-            color: white;
-        }
-        
-        button:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-        
-        .language-select {
-            margin-top: 20px;
-            padding: 8px;
-            border-radius: 5px;
-            border: none;
-            font-size: 1em;
-            display: none;
+        .hidden-links {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            visibility: hidden;
         }
     </style>
 </head>
 <body>
-    <div class="language-container">
-        <h1 id="title">Rising Star Manager</h1>
+    <div>
+        <h1>Rising Star Manager</h1>
+        <div class="spinner"></div>
+        <p>Loading your language version...</p>
+    </div>
+
+    <!-- Скрытые ссылки для SEO -->
+    <div class="hidden-links">
+        <!-- English version -->
+        <a href="/en/index.html">Home</a>
+        <a href="/en/contact.html">Contact</a>
+        <a href="/en/pitch.html">Pitch</a>
         
-        <div id="detected-language">
-            <p class="language-option" id="language-question">Your language: <span id="detected-lang-name">English</span>?</p>
-            <div class="buttons">
-                <button class="confirm-btn" id="confirm-btn">Yes</button>
-                <button class="change-btn" id="change-btn">No, change</button>
-            </div>
-        </div>
+        <!-- Русская версия -->
+        <a href="/ru/index.html">Главная</a>
+        <a href="/ru/contact.html">Контакты</a>
+        <a href="/ru/pitch.html">Презентация</a>
         
-        <div id="select-language" style="display: none;">
-            <p id="select-prompt">Please select your language:</p>
-            <select class="language-select" id="language-select">
-                <option value="en">English</option>
-                <option value="ru">Русский</option>
-                <option value="he">עברית</option>
-            </select>
-            <div class="buttons">
-                <button class="confirm-btn" id="select-confirm-btn">Confirm</button>
-            </div>
-        </div>
+        <!-- Hebrew version -->
+        <a href="/he/index.html">דף הבית</a>
+        <a href="/he/contact.html">יצירת קשר</a>
+        <a href="/he/pitch.html">מצגת</a>
     </div>
 
     <script>
-        // Полная система локализации с SEO-метаданными
-        const translations = {
-            en: {
-                title: "Rising Star Manager",
-                metaTitle: "Rising Star Manager | Competition Platform Language Selection",
-                metaDescription: "Choose your preferred language for Rising Star Manager competition management platform",
-                metaKeywords: "rising star manager, competition platform, dance competitions, music contests, sports events, language selection, english version",
-                languageQuestion: "Your language: ",
-                yes: "Yes",
-                no: "No, change",
-                selectPrompt: "Please select your language:",
-                confirm: "Confirm",
-                languages: {
-                    en: "English",
-                    ru: "Russian",
-                    he: "Hebrew"
-                }
-            },
-            ru: {
-                title: "Rising Star Manager",
-                metaTitle: "Rising Star Manager | Выбор языка платформы для конкурсов",
-                metaDescription: "Выберите предпочитаемый язык для платформы управления конкурсами Rising Star Manager",
-                metaKeywords: "rising star manager, платформа для конкурсов, танцевальные конкурсы, музыкальные соревнования, спортивные мероприятия, выбор языка, русская версия",
-                languageQuestion: "Ваш язык: ",
-                yes: "Да",
-                no: "Нет, изменить",
-                selectPrompt: "Пожалуйста, выберите язык:",
-                confirm: "Подтвердить",
-                languages: {
-                    en: "Английский",
-                    ru: "Русский",
-                    he: "Иврит"
-                }
-            },
-            he: {
-                title: "Rising Star Manager",
-                metaTitle: "Rising Star Manager | בחירת שפה לפלטפורמת תחרויות",
-                metaDescription: "בחר את השפה המועדפת שלך עבור פלטפורמת ניהול תחרויות Rising Star Manager",
-                metaKeywords: "rising star manager, פלטפורמת תחרויות, תחרויות ריקוד, תחרויות מוזיקה, אירועי ספורט, בחירת שפה, גרסה עברית",
-                languageQuestion: "השפה שלך: ",
-                yes: "כן",
-                no: "לא, לשנות",
-                selectPrompt: "אנא בחר שפה:",
-                confirm: "אישור",
-                languages: {
-                    en: "אנגלית",
-                    ru: "רוסית",
-                    he: "עברית"
-                }
-            }
-        };
-
-        // Улучшенное определение языка
-        function detectLanguage() {
+        // Определяем предпочитаемый язык
+        function getPreferredLanguage() {
+            // Поддерживаемые языки
             const supportedLangs = ['en', 'ru', 'he'];
             
-            // 1. Проверяем сохраненные предпочтения
+            // 1. Проверяем сохраненный язык
             const savedLang = localStorage.getItem('preferredLang');
-            if (savedLang && supportedLangs.includes(savedLang)) {
-                return savedLang;
-            }
+            if (savedLang && supportedLangs.includes(savedLang)) return savedLang;
             
             // 2. Анализируем язык браузера
-            const browserLang = navigator.language.substring(0, 2);
-            if (supportedLangs.includes(browserLang)) {
-                return browserLang;
-            }
+            const browserLang = (navigator.language || navigator.userLanguage || 'en').substring(0, 2);
             
-            // 3. Проверяем все предпочитаемые языки
-            if (navigator.languages) {
-                for (let lang of navigator.languages) {
-                    const shortLang = lang.substring(0, 2);
-                    if (supportedLangs.includes(shortLang)) {
-                        return shortLang;
-                    }
-                }
-            }
-            
-            return 'en'; // язык по умолчанию
+            // Сопоставляем с нашими вариантами
+            if (browserLang === 'ru') return 'ru';
+            if (browserLang === 'he') return 'he';
+            return 'en'; // По умолчанию английский
         }
 
-        // Применяем локализацию
-        function applyLocalization(lang) {
-            const t = translations[lang];
-            
-            // Обновляем интерфейс
-            document.getElementById('title').textContent = t.title;
-            document.getElementById('language-question').innerHTML = 
-                t.languageQuestion + `<span id="detected-lang-name">${t.languages[lang]}</span>?`;
-            document.getElementById('confirm-btn').textContent = t.yes;
-            document.getElementById('change-btn').textContent = t.no;
-            document.getElementById('select-prompt').textContent = t.selectPrompt;
-            document.getElementById('select-confirm-btn').textContent = t.confirm;
-            
-            // Обновляем мета-теги
-            document.title = t.metaTitle;
-            document.querySelector('meta[name="title"]').content = t.metaTitle;
-            document.querySelector('meta[name="description"]').content = t.metaDescription;
-            document.querySelector('meta[name="keywords"]').content = t.metaKeywords;
-            document.querySelector('meta[property="og:title"]').content = t.metaTitle;
-            document.querySelector('meta[property="og:description"]').content = t.metaDescription;
-            document.querySelector('meta[property="twitter:title"]').content = t.metaTitle;
-            document.querySelector('meta[property="twitter:description"]').content = t.metaDescription;
-            
-            // Обновляем выбор языков
-            const select = document.getElementById('language-select');
-            for (let option of select.options) {
-                option.textContent = t.languages[option.value];
-            }
-        }
-
-        // Определяем язык и применяем локализацию
-        const userLang = detectLanguage();
-        applyLocalization(userLang);
-        
-        // Обработчики событий
-        document.getElementById('confirm-btn').addEventListener('click', function() {
-            localStorage.setItem('preferredLang', userLang);
-            window.location.href = userLang + '/index.html';
+        // Перенаправляем на соответствующую языковую версию
+        window.addEventListener('DOMContentLoaded', () => {
+            const lang = getPreferredLanguage();
+            setTimeout(() => {
+                window.location.href = `/${lang}/index.html`;
+            }, 300); // Быстрое перенаправление
         });
-        
-        document.getElementById('change-btn').addEventListener('click', function() {
-            document.getElementById('detected-language').style.display = 'none';
-            document.getElementById('select-language').style.display = 'block';
-            document.getElementById('language-select').value = userLang;
-        });
-        
-        document.getElementById('select-confirm-btn').addEventListener('click', function() {
-            const selectedLang = document.getElementById('language-select').value;
-            localStorage.setItem('preferredLang', selectedLang);
-            window.location.href = selectedLang + '/index.html';
-        });
-        
-        // Автоматический редирект через 8 секунд
-        setTimeout(function() {
-            if (!window.location.href.includes('/index.html')) {
-                window.location.href = userLang + '/index.html';
-            }
-        }, 8000);
     </script>
 </body>
 </html>
