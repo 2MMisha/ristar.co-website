@@ -1,1288 +1,268 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rising Star Manager - Competition Management Platform</title>
-  <style>
-    /* Discount Banner Styles */
-    .discount-banner {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(135deg, #0c57ab, #28a745);
-      color: white;
-      padding: 15px 20px;
-      z-index: 1000;
-      box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    <link rel="canonical" href="https://ristar.co/" />
     
-    .discount-banner-content {
-      flex: 1;
-    }
+    <!-- Primary Meta Tags -->
+    <title>Rising Star Manager - Language Selection</title>
+    <meta name="title" content="Rising Star Manager - Language Selection">
+    <meta name="description" content="Select your preferred language for Rising Star Manager competition platform">
+    <meta name="keywords" content="rising star, competition manager, language selection, choose language, ristar">
     
-    .discount-banner-title {
-      font-weight: bold;
-      margin-bottom: 5px;
-      font-size: 1.1rem;
-    }
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ristar.co/">
+    <meta property="og:title" content="Rising Star Manager - Language Selection">
+    <meta property="og:description" content="Select your preferred language for Rising Star Manager competition platform">
+    <meta property="og:image" content="https://ristar.co/images/og-image.jpg">
     
-    .discount-banner-text {
-      font-size: 0.9rem;
-    }
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ristar.co/">
+    <meta property="twitter:title" content="Rising Star Manager - Language Selection">
+    <meta property="twitter:description" content="Select your preferred language for Rising Star Manager competition platform">
+    <meta property="twitter:image" content="https://ristar.co/images/twitter-image.jpg">
     
-    .discount-banner-close {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-      margin-left: 15px;
-    }
-    
-    .discount-banner-button {
-      background: white;
-      color: #0c57ab;
-      padding: 8px 15px;
-      border-radius: 5px;
-      font-weight: bold;
-      text-decoration: none;
-      margin-left: 15px;
-      white-space: nowrap;
-    }
-    
-    .discount-banner-button:hover {
-      background: #e6e6e6;
-    }
-    
-    /* Discount Modal Styles */
-    .discount-modal {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: linear-gradient(135deg, #0c57ab, #28a745);
-      color: white;
-      padding: 30px;
-      border-radius: 15px;
-      z-index: 2000;
-      max-width: 90%;
-      width: 500px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      animation: modalAppear 0.5s ease-out;
-      text-align: center;
-    }
-    
-    .discount-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.7);
-      z-index: 1999;
-      backdrop-filter: blur(5px);
-    }
-    
-    .discount-close {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 24px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    
-    .discount-title {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    }
-    
-    .discount-item {
-      background: rgba(255,255,255,0.15);
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      text-align: left;
-    }
-    
-    .discount-percent {
-      font-size: 32px;
-      font-weight: bold;
-      color: #ffcc00;
-      display: block;
-      margin-bottom: 5px;
-    }
-    
-    .discount-note {
-      font-size: 18px;
-      margin-top: 20px;
-      font-weight: bold;
-      color: #ffcc00;
-    }
-    
-    .discount-highlight {
-      background: rgba(255,255,255,0.2);
-      padding: 2px 5px;
-      border-radius: 3px;
-      font-weight: bold;
-    }
-    
-    @keyframes modalAppear {
-      from {
-        opacity: 0;
-        transform: translate(-50%, -60%);
-      }
-      to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-      }
-    }
-    
-    @media (max-width: 600px) {
-      .discount-modal {
-        width: 90%;
-        padding: 20px;
-      }
-      
-      .discount-title {
-        font-size: 22px;
-      }
-      
-      .discount-percent {
-        font-size: 26px;
-      }
-      
-      .discount-banner {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .discount-banner-button {
-        margin-top: 10px;
-        margin-left: 0;
-      }
-    }
-
-    /* LOADER */
-    #loader {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #0c57ab;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      opacity: 1;
-      transition: opacity 0.7s ease;
-    }
-    #loader.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* Hide content before load */
-    body.preload {
-      overflow: hidden;
-    }
-    body.preload > *:not(#loader) {
-      opacity: 0;
-      visibility: hidden;
-    }
-    body.loaded > *:not(#loader) {
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
-
-    .progress-bar {
-      width: 80%;
-      max-width: 400px;
-      height: 8px;
-      background: rgba(255,255,255,0.3);
-      border-radius: 4px;
-      overflow: hidden;
-      margin-top: 15px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.4);
-    }
-
-    .progress-bar-inner {
-      height: 100%;
-      width: 0;
-      background: #fff;
-      border-radius: 4px;
-      animation: progressLoad 3s linear forwards;
-    }
-
-    @keyframes progressLoad {
-      0% { width: 0; }
-      100% { width: 100%; }
-    }
-
-    /* CTA Button Styles */
-    .cta-button {
-      display: inline-block;
-      background: white;
-      color: #0c57ab;
-      padding: 12px 24px;
-      border-radius: 30px;
-      font-weight: bold;
-      text-decoration: none;
-      margin-top: 20px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 1rem;
-      border: 2px solid white;
-    }
-    
-    .cta-button:hover {
-      background: transparent;
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    }
-    
-    .cta-button.secondary {
-      background: transparent;
-      color: white;
-      border: 2px solid white;
-      margin-left: 15px;
-    }
-    
-    .cta-button.secondary:hover {
-      background: white;
-      color: #0c57ab;
-    }
-    
-    .cta-section {
-      text-align: center;
-      margin: 40px 0;
-    }
-    
-    .cta-section h2 {
-      color: #0c57ab;
-      margin-bottom: 20px;
-    }
-    
-    .cta-section p {
-      margin-bottom: 30px;
-      font-size: 1.1rem;
-    }
-
-    /* Main styles */
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Arimo', 'Montserrat', sans-serif;
-      background-color: #0c57ab;
-      color: #fff;
-      height: 100%;
-    }
-
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: #0c57ab;
-      z-index: 1000;
-      padding: 10px 20px;
-      box-sizing: border-box;
-    }
-
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .nav-brand img {
-      height: 40px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .nav-brand img:hover {
-      transform: scale(1.05);
-    }
-
-    /* Navigation links */
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .nav-link {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      white-space: nowrap;
-      padding: 8px 12px;
-      border-radius: 5px;
-      transition: background 0.3s ease;
-    }
-
-    .nav-link:hover {
-      background: rgba(255,255,255,0.1);
-    }
-
-    /* Buttons */
-    .nav-btn {
-      background: white;
-      color: #0c57ab;
-      padding: 8px 15px;
-      border-radius: 5px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-
-    .nav-btn:hover {
-      background: #e6e6e6;
-    }
-
-    /* Language buttons */
-    .lang-buttons {
-      display: flex;
-      gap: 5px;
-      margin-left: 15px;
-    }
-    
-    .lang-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 5px;
-    }
-    
-    .lang-btn img {
-      width: 24px;
-      height: 16px;
-      border-radius: 2px;
-      transition: transform 0.2s;
-    }
-    
-    .lang-btn:hover img {
-      transform: scale(1.1);
-    }
-
-    /* Hamburger menu */
-    .hamburger {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 5px;
-      z-index: 1001;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background: #fff;
-      margin: 5px 0;
-      transition: all 0.3s ease;
-    }
-
-    /* Mobile menu */
-    .mobile-menu {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 80%;
-      max-width: 300px;
-      height: 100vh;
-      background: #0c57ab;
-      z-index: 1000;
-      transition: right 0.3s ease;
-      padding-top: 70px;
-      box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-    }
-
-    .mobile-menu.active {
-      right: 0;
-    }
-
-    .mobile-menu-content {
-      display: flex;
-      flex-direction: column;
-      height: calc(100% - 70px);
-      padding: 20px;
-    }
-
-    .mobile-link {
-      color: white;
-      padding: 15px 0;
-      text-decoration: none;
-      font-size: 1.1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .mobile-btn {
-      background: white;
-      color: #0c57ab;
-      margin: 15px 0;
-      border-radius: 5px;
-      text-align: center;
-      font-weight: bold;
-      padding: 12px;
-    }
-
-    /* Language buttons in mobile menu */
-    .mobile-lang-switcher {
-      margin-top: auto;
-      padding-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    /* Overlay */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-    
-    .overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* Hide overlay after load */
-    body.loaded .overlay {
-      display: none;
-    }
-
-    /* Hamburger animations */
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-
-    /* Other styles */
-    .div-start {
-      background-color: #0c57ab;
-      padding: 20px;
-      border-radius: 10px;
-      display: inline-block;
-    }
-
-    header {
-      position: relative;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .video-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-    }
-
-    .header-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(12, 87, 171, 0.3);
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 30px 20px;
-      box-sizing: border-box;
-    }
-
-    .logo {
-      max-height: 80px;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-
-    .tagline {
-      font-size: 1.5rem;
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: 6px;
-      max-width: 600px;
-    }
-
-    section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: 100px auto 40px auto;
-      background: #fff;
-      color: #1c1c1c;
-      border-radius: 12px;
-      box-sizing: border-box;
-    }
-
-    .description, .services {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-
-    .contact-form {
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .contact-form h2 {
-      margin-bottom: 20px;
-      color: #0c57ab;
-    }
-
-    .contact-form form {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-
-    .contact-form button {
-      padding: 12px 24px;
-      background-color: #0c57ab;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .contact-form button:hover,
-    .contact-form button:focus {
-      background-color: #094a7a;
-      outline: none;
-    }
-
-    .form-success-toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #28a745;
-      color: #fff;
-      padding: 15px 20px;
-      border-radius: 8px;
-      font-size: 1rem;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
-      z-index: 9999;
-      display: none;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .form-success-toast.show {
-      display: block;
-      opacity: 1;
-    }
-
-    footer {
-      background-color: #0c57ab;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #fff;
-      margin-bottom: 60px; /* Account for fixed banner */
-    }
-
-    .no-scroll {
-      overflow: hidden;
-    }
-
-    /* Responsiveness */
-    @media (max-width: 900px) {
-      section {
-        margin: 80px 15px 30px 15px;
-        padding: 30px 15px;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      .tagline {
-        font-size: 1.3rem;
-        max-width: 100%;
-      }
-      
-      .cta-buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-      }
-      
-      .cta-button.secondary {
-        margin-left: 0;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hamburger {
-        display: block;
-      }
-      
-      .nav-links {
-        display: none;
-      }
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      .tagline {
-        font-size: 1rem;
-        padding: 8px;
-      }
-
-      section {
-        margin: 80px 10px 20px 10px;
-        padding: 20px 15px;
-      }
-
-      .contact-form input,
-      .contact-form textarea {
-        font-size: 0.9rem;
-        padding: 10px;
-      }
-
-      .contact-form button {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-      }
-      
-      .cta-button {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-      }
-    }
-  </style>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0c57ab;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        
+        .language-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        h1 {
+            margin-bottom: 30px;
+        }
+        
+        .language-option {
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .confirm-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .change-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .language-select {
+            margin-top: 20px;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+            display: none;
+        }
+    </style>
 </head>
-<body class="preload">
-  <!-- LOADER -->
-  <div id="loader" role="alert" aria-live="assertive" aria-busy="true" aria-label="Loading website">
-    <div>Loading...</div>
-    <div class="progress-bar" aria-hidden="true">
-      <div class="progress-bar-inner"></div>
-    </div>
-  </div>
-
-  <div style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden;">
-  <h1>Rising Star Manager — управление конкурсами</h1>
-  <p>Онлайн-платформа для организации музыкальных, танцевальных и спортивных соревнований в Израиле и по всему миру. Простая регистрация участников, расписание, система судейства на планшетах, публикация результатов и управление конкурсами.</p>
-  <p>Регистрация на конкурсы, голосование судей, интерфейс на английском, иврите и русском языках. Подходит для организаторов мероприятий любого масштаба: от местных школьных соревнований до международных фестивалей.</p>
-  <p>Competition registration platform for events in Israel and internationally. Judges' tablets, real-time results, schedule, multi-language support (EN, HE, RU). For dance, music, and sports competitions.</p>
-  <p>רישום לתחרויות מוזיקה, ריקוד וספורט בישראל. ניהול שופטים, טבלאות ניקוד, תוצאות בזמן אמת. תמיכה מלאה בעברית, אנגלית ורוסית. Rising Star Manager.</p>
-  <ul>
-    <li>Управление конкурсами</li>
-    <li>Платформа судейства</li>
-    <li>Онлайн-регистрация</li>
-    <li>Расписание мероприятий</li>
-    <li>Живая система баллов</li>
-    <li>Rising Star competition system</li>
-    <li>ניהול תחרויות</li>
-    <li>Судейство на планшетах</li>
-    <li>Competition management system</li>
-  </ul>
-</div>
-  <!-- NAVIGATION -->
-  <nav>
-    <div class="nav-container">
-      <div class="nav-brand">
-        <img src="logo-w.png" alt="Rising Star Logo" onclick="window.location.href='index.html'" />
-         <img src="by2m.png" alt="2M Media Project" onclick="window.location.href='https://www.2mmedia.co'" />
-      </div>
-      
-      <!-- Desktop navigation -->
-      <div class="nav-links">
-        <a href="index.html" class="nav-link" id="nav-home">Home</a>
-        <a href="contact.html" class="nav-link" id="nav-contact">Contact</a>
-        <a href="pitch.html" class="nav-link" id="nav-pitch">Pitching Presentations</a>
-        <a href="https://results.ristar.co" class="nav-btn" target="_blank" id="nav-results">Results</a>
-        <a href="https://registration.ristar.co" class="nav-btn" target="_blank" id="nav-register">Register</a>
+<body>
+    <div class="language-container">
+        <h1 id="title">Rising Star Manager</h1>
         
-        <div class="lang-buttons">
-          <button class="lang-btn" onclick="switchLang('en')" aria-label="English">
-            <img src="https://flagcdn.com/w40/gb.png" alt="English" />
-          </button>
-          <button class="lang-btn" onclick="switchLang('ru')" aria-label="Русский">
-            <img src="https://flagcdn.com/w40/ru.png" alt="Русский" />
-          </button>
-          <button class="lang-btn" onclick="switchLang('he')" aria-label="עברית">
-            <img src="https://flagcdn.com/w40/il.png" alt="עברית" />
-          </button>
+        <div id="detected-language">
+            <p class="language-option" id="language-question">Your language: <span id="detected-lang-name">English</span>?</p>
+            <div class="buttons">
+                <button class="confirm-btn" id="confirm-btn">Yes</button>
+                <button class="change-btn" id="change-btn">No, change</button>
+            </div>
         </div>
-      </div>
-
-      <button class="hamburger" id="hamburger" aria-expanded="false" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <!-- Mobile menu -->
-      <div class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu-content">
-          <a href="index.html" class="mobile-link" id="mobile-home">Home</a>
-          <a href="contact.html" class="mobile-link" id="mobile-contact">Contact</a>
-          <a href="pitch.html" class="mobile-link" id="mobile-pitch">Pitching Presentation</a>
-          <a href="https://results.ristar.co" class="mobile-btn" target="_blank" id="mobile-results">Results</a>
-          <a href="https://registration.ristar.co" class="mobile-btn" target="_blank" id="mobile-register">Register</a>
-          
-          <div class="mobile-lang-switcher">
-            <button class="lang-btn" onclick="switchLang('en')" aria-label="English">
-              <img src="https://flagcdn.com/w40/gb.png" alt="English" />
-            </button>
-            <button class="lang-btn" onclick="switchLang('ru')" aria-label="Русский">
-              <img src="https://flagcdn.com/w40/ru.png" alt="Русский" />
-            </button>
-            <button class="lang-btn" onclick="switchLang('he')" aria-label="עברית">
-              <img src="https://flagcdn.com/w40/il.png" alt="עברית" />
-            </button>
-          </div>
+        
+        <div id="select-language" style="display: none;">
+            <p id="select-prompt">Please select your language:</p>
+            <select class="language-select" id="language-select">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="he">עברית</option>
+            </select>
+            <div class="buttons">
+                <button class="confirm-btn" id="select-confirm-btn">Confirm</button>
+            </div>
         </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Overlay -->
-  <div class="overlay" id="overlay"></div>
-
-  <!-- MAIN CONTENT -->
-  <header>
-    <video autoplay muted loop playsinline class="video-bg" aria-hidden="true" tabindex="-1" preload="none" poster="placeholder.jpg">
-      <source src="header.webm" type="video/webm">
-    </video>
-    <div class="header-content">
-      <div class="div-start">
-        <img src="logo-w.png" alt="Rising Star Manager Logo" class="logo" />
-        <h1 id="main-title">Rising Star Manager</h1>
-        <div class="tagline" id="tagline">Your competition, our system</div>
-        
-        <!-- Header CTA Buttons -->
-        <div class="cta-buttons">
-          <a href="contact.html" class="cta-button" id="header-cta-primary">Get Started</a>
-          <a href="contact.html" class="cta-button secondary" id="header-cta-secondary">Learn More</a>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <section>
-    <div class="description">
-      <p id="desc-text">
-        Rising Star Manager is a full-service competition management platform.
-      </p>
-    </div>
-    <h2 id="services-title" style="text-align:center; margin-bottom:30px;">How the system works</h2>
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      <div style="display: flex; align-items: center; gap: 15px;">
-        <img src="https://img.icons8.com/color/48/handshake.png" alt="Agreement" />
-        <span id="step-0">We sign a contract and configure the system for you</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 15px;">
-        <img src="https://img.icons8.com/color/48/calendar.png" alt="Calendar" />
-        <span id="step-1">We create the event and open registration</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 15px;">
-        <img src="https://img.icons8.com/color/48/add-user-group-man-man.png" alt="Registration" />
-        <span id="step-2">Participants register online</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 15px;">
-        <img src="https://img.icons8.com/color/48/clock--v1.png" alt="Schedule" />
-        <span id="step-3">We generate a schedule and distribute by categories</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 15px;">
-        <img src="https://img.icons8.com/color/48/whistle.png" alt="Judging" />
-        <span id="step-4">Judging is done within the system</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 15px;">
-        <img src="https://img.icons8.com/color/48/combo-chart--v1.png" alt="Results" />
-        <span id="step-5">The system calculates and updates results in real time</span>
-      </div>
-      <div style="display: flex; align-items: center; gap: 15px;">
-        <img src="https://img.icons8.com/color/48/share-rounded.png" alt="Publishing" />
-        <span id="step-6">We publish final standings and issue certificates</span>
-      </div>
-    </div>
-    
-    <!-- CTA Section after "How it works" -->
-    <div class="cta-section">
-      <h2 id="cta-title">Ready to transform your competition?</h2>
-      <p id="cta-text">Contact us today to learn how Rising Star Manager can streamline your event management process.</p>
-      <a href="contact.html" class="cta-button" id="main-cta-button">Request a Demo</a>
     </div>
 
-    <div class="contact-form">
-      <h2 id="form-heading">Contact Us</h2>
-      <p id="form-subtitle">Need more information? <a href="contact.html" style="color: #0c57ab; font-weight: bold;">Visit our contact page</a> or send us a message below.</p>
-      <form id="contactForm" aria-label="Contact form" action="https://formsubmit.co/2mmedia.il@gmail.com" method="POST">
-        <input id="name-field" type="text" name="name" placeholder="Your Name" required aria-required="true" />
-        <input id="email-field" type="email" name="email" placeholder="Your Email" required aria-required="true" />
-        <textarea id="message-field" name="message" rows="5" placeholder="Your Message..." required aria-required="true"></textarea>
-        <input type="text" name="_honey" style="display:none" autocomplete="off" />
-        <input type="hidden" name="_captcha" value="false" />
-        <button id="submit-button" type="submit">Send</button>
-      </form>
-      <div class="form-success-toast" id="formSuccessToast" role="alert" aria-live="assertive" aria-atomic="true">✅ Sent, thank you!</div>
-    </div>
-  </section>
-
-  <footer>
-    <div id="footer-text">© 2025 Rising Star Manager. All rights reserved.</div>
-  </footer>
-
-  <!-- Discount Banner -->
-  <div class="discount-banner" id="discountBanner">
-    <div class="discount-banner-content">
-      <div class="discount-banner-title" id="discountBannerTitle">SPECIAL OFFER: 55% discount for new customers!</div>
-      <div class="discount-banner-text" id="discountBannerText">35% discount if you switch from another service with less than 30 days remaining. All discounts stack!</div>
-    </div>
-    <a href="contact.html" class="discount-banner-button" id="discountBannerButton">Contact Us</a>
-    <button class="discount-banner-close" id="discountBannerClose">&times;</button>
-  </div>
-
-  <script>
-    // Simplified loader hiding logic
-    function hideLoader() {
-      const loader = document.getElementById('loader');
-      if (loader) {
-        loader.classList.add('hidden');
-        document.body.classList.remove('preload');
-        document.body.classList.add('loaded');
-        
-        setTimeout(() => {
-          loader.remove();
-          document.getElementById('overlay').style.display = 'none';
-        }, 700);
-      }
-    }
-
-    // Try to hide loader when page is fully loaded
-    window.addEventListener('load', hideLoader);
-
-    // Fallback in case load event doesn't fire
-    setTimeout(hideLoader, 2000);
-
-    // Translations
-    const translations = {
-      ru: {
-        lang: "ru", dir: "ltr",
-        title: "Rising Star Manager",
-        tagline: "Ваши соревнования — наша система",
-        description: "Rising Star Manager — универсальный сервис для полного менеджмента соревнований.",
-        servicesTitle: "Как работает система",
-        servicesSteps: [
-          "Заключаем договор и настраиваем систему под вас",
-          "Создаём событие и открываем регистрацию",
-          "Участники регистрируются онлайн",
-          "Формируем расписание и распределяем по категориям",
-          "Судейство проводится в системе",
-          "Система считает и обновляет результаты в реальном времени",
-          "Публикуем итоги и выдаём сертификаты"
-        ],
-        nav: { 
-          home: "Главная", 
-          contact: "Контакты",
-          pitch: "Презентация",
-          results: "Результаты",
-          register: "Регистрация"
-        },
-        form: { 
-          heading: "Связаться с нами", 
-          subtitle: "Нужна дополнительная информация? <a href='contact.html' style='color: #0c57ab; font-weight: bold;'>Посетите страницу контактов</a> или отправьте нам сообщение ниже.",
-          name: "Ваше имя", 
-          email: "Ваш Email", 
-          message: "Ваше сообщение...", 
-          send: "Отправить" 
-        },
-        cta: {
-          headerPrimary: "Начать",
-          headerSecondary: "Подробнее",
-          sectionTitle: "Готовы преобразовать ваши соревнования?",
-          sectionText: "Свяжитесь с нами сегодня, чтобы узнать, как Rising Star Manager может упростить процесс организации вашего мероприятия.",
-          sectionButton: "Запросить демо"
-        },
-        footer: "Все права защищены.",
-        toast: "✅ Отправлено, спасибо!",
-        discount: {
-          modalTitle: "🔥 ОГРОМНЫЕ СКИДКИ ДЛЯ НОВЫХ КЛИЕНТОВ! 🔥",
-          modalItems: [
-            {
-              percent: "55% СКИДКА",
-              text: "Для новых клиентов при первом заказе нашей системы управления конкурсами!"
+    <script>
+        // Полная система локализации с SEO-метаданными
+        const translations = {
+            en: {
+                title: "Rising Star Manager",
+                metaTitle: "Rising Star Manager | Competition Platform Language Selection",
+                metaDescription: "Choose your preferred language for Rising Star Manager competition management platform",
+                metaKeywords: "rising star manager, competition platform, dance competitions, music contests, sports events, language selection, english version",
+                languageQuestion: "Your language: ",
+                yes: "Yes",
+                no: "No, change",
+                selectPrompt: "Please select your language:",
+                confirm: "Confirm",
+                languages: {
+                    en: "English",
+                    ru: "Russian",
+                    he: "Hebrew"
+                }
             },
-            {
-              percent: "35% СКИДКА",
-              text: "Если вы переходите к нам от другого сервиса и до окончания текущего контракта осталось менее 30 дней!"
-            }
-          ],
-          modalNote: "⚡ ВСЕ СКИДКИ <span class='discount-highlight'>СКЛАДЫВАЮТСЯ</span>! ⚡<br>Предложение действительно ограниченное время!",
-          bannerTitle: "СПЕЦИАЛЬНОЕ ПРЕДЛОЖЕНИЕ: скидка 55% для новых клиентов!",
-          bannerText: "Скидка 35% при переходе от другого сервиса с оставшимся сроком менее 30 дней. Все скидки суммируются!",
-          bannerButton: "Связаться с нами"
-        }
-      },
-      en: {
-        lang: "en", dir: "ltr",
-        title: "Rising Star Manager",
-        tagline: "Your competition, our system",
-        description: "Rising Star Manager is a full-service competition management platform.",
-        servicesTitle: "How the system works",
-        servicesSteps: [
-          "We sign a contract and configure the system for you",
-          "We create the event and open registration",
-          "Participants register online",
-          "We generate a schedule and distribute by categories",
-          "Judging is done within the system",
-          "The system calculates and updates results in real time",
-          "We publish final standings and issue certificates"
-        ],
-        nav: { 
-          home: "Home", 
-          contact: "Contact",
-          pitch: "Pitching Presentations",
-          results: "Results",
-          register: "Register"
-        },
-        form: { 
-          heading: "Contact Us", 
-          subtitle: "Need more information? <a href='contact.html' style='color: #0c57ab; font-weight: bold;'>Visit our contact page</a> or send us a message below.",
-          name: "Your Name", 
-          email: "Your Email", 
-          message: "Your Message...", 
-          send: "Send" 
-        },
-        cta: {
-          headerPrimary: "Get Started",
-          headerSecondary: "Learn More",
-          sectionTitle: "Ready to transform your competition?",
-          sectionText: "Contact us today to learn how Rising Star Manager can streamline your event management process.",
-          sectionButton: "Request a Demo"
-        },
-        footer: "All rights reserved.",
-        toast: "✅ Sent, thank you!",
-        discount: {
-          modalTitle: "🔥 HUGE DISCOUNTS FOR NEW CUSTOMERS! 🔥",
-          modalItems: [
-            {
-              percent: "55% DISCOUNT",
-              text: "For new customers on their first order of our competition management system!"
+            ru: {
+                title: "Rising Star Manager",
+                metaTitle: "Rising Star Manager | Выбор языка платформы для конкурсов",
+                metaDescription: "Выберите предпочитаемый язык для платформы управления конкурсами Rising Star Manager",
+                metaKeywords: "rising star manager, платформа для конкурсов, танцевальные конкурсы, музыкальные соревнования, спортивные мероприятия, выбор языка, русская версия",
+                languageQuestion: "Ваш язык: ",
+                yes: "Да",
+                no: "Нет, изменить",
+                selectPrompt: "Пожалуйста, выберите язык:",
+                confirm: "Подтвердить",
+                languages: {
+                    en: "Английский",
+                    ru: "Русский",
+                    he: "Иврит"
+                }
             },
-            {
-              percent: "35% DISCOUNT",
-              text: "If you're switching from another service with less than 30 days remaining on your current contract!"
+            he: {
+                title: "Rising Star Manager",
+                metaTitle: "Rising Star Manager | בחירת שפה לפלטפורמת תחרויות",
+                metaDescription: "בחר את השפה המועדפת שלך עבור פלטפורמת ניהול תחרויות Rising Star Manager",
+                metaKeywords: "rising star manager, פלטפורמת תחרויות, תחרויות ריקוד, תחרויות מוזיקה, אירועי ספורט, בחירת שפה, גרסה עברית",
+                languageQuestion: "השפה שלך: ",
+                yes: "כן",
+                no: "לא, לשנות",
+                selectPrompt: "אנא בחר שפה:",
+                confirm: "אישור",
+                languages: {
+                    en: "אנגלית",
+                    ru: "רוסית",
+                    he: "עברית"
+                }
             }
-          ],
-          modalNote: "⚡ ALL DISCOUNTS <span class='discount-highlight'>STACK</span>! ⚡<br>Limited time offer!",
-          bannerTitle: "SPECIAL OFFER: 55% discount for new customers!",
-          bannerText: "35% discount if you switch from another service with less than 30 days remaining. All discounts stack!",
-          bannerButton: "Contact Us"
-        }
-      },
-      he: {
-        lang: "he", dir: "rtl",
-        title: "Rising Star Manager",
-        tagline: "התחרות שלכם – המערכת שלנו",
-        description: "Rising Star Manager הוא שירות לניהול תחרויות מקצה לקצה.",
-        servicesTitle: "איך המערכת פועלת",
-        servicesSteps: [
-          "חותמים על חוזה ומגדירים את המערכת לפי הצרכים שלכם",
-          "יוצרים אירוע ופותחים את ההרשמה",
-          "המשתתפים נרשמים אונליין",
-          "יוצרים לוח זמנים ומחלקים לפי קטגוריות",
-          "השיפוט מתבצע במערכת",
-          "התוצאות מתעדכנות בזמן אמת",
-          "מפרסמים את התוצאות ומנפיקים תעודות"
-        ],
-        nav: { 
-          home: "בית", 
-          contact: "יצירת קשר",
-          pitch: "פרזנטציה",
-          results: "תוצאות",
-          register: "הרשמה"
-        },
-        form: { 
-          heading: "צור קשר", 
-          subtitle: "צריכים מידע נוסף? <a href='contact.html' style='color: #0c57ab; font-weight: bold;'>עברו לדף יצירת הקשר</a> או שלחו לנו הודעה למטה.",
-          name: "שמך", 
-          email: "האימייל שלך", 
-          message: "ההודעה שלך...", 
-          send: "שלח" 
-        },
-        cta: {
-          headerPrimary: "התחל עכשיו",
-          headerSecondary: "למידע נוסף",
-          sectionTitle: "מוכנים לשדרג את התחרות שלכם?",
-          sectionText: "צרו איתנו קשר היום כדי ללמוד איך Rising Star Manager יכול לפשט את תהליך ניהול האירועים שלכם.",
-          sectionButton: "בקשו הדגמה"
-        },
-        footer: "כל הזכויות שמורות.",
-        toast: "✅ נשלח, תודה!",
-        discount: {
-          modalTitle: "🔥 הנחות ענק ללקוחות חדשים! 🔥",
-          modalItems: [
-            {
-              percent: "55% הנחה",
-              text: "ללקוחות חדשים בהזמנה הראשונה של מערכת ניהול התחרויות שלנו!"
-            },
-            {
-              percent: "35% הנחה",
-              text: "אם אתם עוברים אלינו מספק אחר עם פחות מ-30 ימים נותרים בחוזה הנוכחי!"
+        };
+
+        // Улучшенное определение языка
+        function detectLanguage() {
+            const supportedLangs = ['en', 'ru', 'he'];
+            
+            // 1. Проверяем сохраненные предпочтения
+            const savedLang = localStorage.getItem('preferredLang');
+            if (savedLang && supportedLangs.includes(savedLang)) {
+                return savedLang;
             }
-          ],
-          modalNote: "⚡ כל ההנחות <span class='discount-highlight'>מצטברות</span>! ⚡<br>הצעה לזמן מוגבל!",
-          bannerTitle: "הצעה מיוחדת: 55% הנחה ללקוחות חדשים!",
-          bannerText: "35% הנחה אם עוברים מספק אחר עם פחות מ-30 ימים נותרים. כל ההנחות מצטברות!",
-          bannerButton: "יצירת קשר"
+            
+            // 2. Анализируем язык браузера
+            const browserLang = navigator.language.substring(0, 2);
+            if (supportedLangs.includes(browserLang)) {
+                return browserLang;
+            }
+            
+            // 3. Проверяем все предпочитаемые языки
+            if (navigator.languages) {
+                for (let lang of navigator.languages) {
+                    const shortLang = lang.substring(0, 2);
+                    if (supportedLangs.includes(shortLang)) {
+                        return shortLang;
+                    }
+                }
+            }
+            
+            return 'en'; // язык по умолчанию
         }
-      }
-    };
 
-    // Show discount modal
-    function showDiscountModal() {
-      const overlay = document.createElement('div');
-      overlay.className = 'discount-overlay';
-      
-      const modal = document.createElement('div');
-      modal.className = 'discount-modal';
-      
-      const currentLang = document.documentElement.lang || 'en';
-      const t = translations[currentLang].discount;
-      
-      modal.innerHTML = `
-        <button class="discount-close" aria-label="Close discount modal">&times;</button>
-        <div class="discount-title">${t.modalTitle}</div>
+        // Применяем локализацию
+        function applyLocalization(lang) {
+            const t = translations[lang];
+            
+            // Обновляем интерфейс
+            document.getElementById('title').textContent = t.title;
+            document.getElementById('language-question').innerHTML = 
+                t.languageQuestion + `<span id="detected-lang-name">${t.languages[lang]}</span>?`;
+            document.getElementById('confirm-btn').textContent = t.yes;
+            document.getElementById('change-btn').textContent = t.no;
+            document.getElementById('select-prompt').textContent = t.selectPrompt;
+            document.getElementById('select-confirm-btn').textContent = t.confirm;
+            
+            // Обновляем мета-теги
+            document.title = t.metaTitle;
+            document.querySelector('meta[name="title"]').content = t.metaTitle;
+            document.querySelector('meta[name="description"]').content = t.metaDescription;
+            document.querySelector('meta[name="keywords"]').content = t.metaKeywords;
+            document.querySelector('meta[property="og:title"]').content = t.metaTitle;
+            document.querySelector('meta[property="og:description"]').content = t.metaDescription;
+            document.querySelector('meta[property="twitter:title"]').content = t.metaTitle;
+            document.querySelector('meta[property="twitter:description"]').content = t.metaDescription;
+            
+            // Обновляем выбор языков
+            const select = document.getElementById('language-select');
+            for (let option of select.options) {
+                option.textContent = t.languages[option.value];
+            }
+        }
+
+        // Определяем язык и применяем локализацию
+        const userLang = detectLanguage();
+        applyLocalization(userLang);
         
-        ${t.modalItems.map(item => `
-          <div class="discount-item">
-            <span class="discount-percent">${item.percent}</span>
-            ${item.text}
-          </div>
-        `).join('')}
-        
-        <div class="discount-note">${t.modalNote}</div>
-      `;
-      
-      document.body.appendChild(overlay);
-      document.body.appendChild(modal);
-      
-      // Close modal
-      modal.querySelector('.discount-close').addEventListener('click', function() {
-        document.body.removeChild(overlay);
-        document.body.removeChild(modal);
-      });
-      
-      // Close when clicking outside
-      overlay.addEventListener('click', function() {
-        document.body.removeChild(overlay);
-        document.body.removeChild(modal);
-      });
-    }
-
-    // Detect user's preferred language
-    function detectLanguage() {
-      const userLang = navigator.language || navigator.userLanguage;
-      if (userLang.startsWith('ru')) return 'ru';
-      if (userLang.startsWith('he')) return 'he';
-      return 'en'; // default to English
-    }
-
-    // Switch language
-    function switchLang(lang) {
-      const t = translations[lang];
-      document.documentElement.lang = t.lang;
-      document.documentElement.dir = t.dir;
-      document.title = t.title;
-
-      // Update main content
-      document.getElementById('main-title').innerText = t.title;
-      document.getElementById('tagline').innerText = t.tagline;
-      document.getElementById('desc-text').innerText = t.description;
-      document.getElementById('services-title').innerText = t.servicesTitle;
-      
-      // Update steps
-      const serviceSteps = t.servicesSteps;
-      for (let i = 0; i < serviceSteps.length; i++) {
-        const stepEl = document.getElementById(`step-${i}`);
-        if (stepEl) stepEl.innerText = serviceSteps[i];
-      }
-
-      // Update navigation
-      document.getElementById('nav-home').innerText = t.nav.home;
-      document.getElementById('nav-contact').innerText = t.nav.contact;
-      document.getElementById('nav-pitch').innerText = t.nav.pitch;
-      document.getElementById('nav-results').innerText = t.nav.results;
-      document.getElementById('nav-register').innerText = t.nav.register;
-
-      // Update mobile navigation
-      document.getElementById('mobile-home').innerText = t.nav.home;
-      document.getElementById('mobile-contact').innerText = t.nav.contact;
-      document.getElementById('mobile-pitch').innerText = t.nav.pitch;
-      document.getElementById('mobile-results').innerText = t.nav.results;
-      document.getElementById('mobile-register').innerText = t.nav.register;
-
-      // Update form
-      document.getElementById('form-heading').innerText = t.form.heading;
-      document.getElementById('form-subtitle').innerHTML = t.form.subtitle;
-      document.getElementById('name-field').placeholder = t.form.name;
-      document.getElementById('email-field').placeholder = t.form.email;
-      document.getElementById('message-field').placeholder = t.form.message;
-      document.getElementById('submit-button').innerText = t.form.send;
-
-      // Update footer
-      document.getElementById('footer-text').innerText = `© 2025 Rising Star Manager. ${t.footer}`;
-      
-      // Update discount banner
-      document.getElementById('discountBannerTitle').innerText = t.discount.bannerTitle;
-      document.getElementById('discountBannerText').innerText = t.discount.bannerText;
-      document.getElementById('discountBannerButton').innerText = t.discount.bannerButton;
-      
-      // Update CTA buttons
-      document.getElementById('header-cta-primary').innerText = t.cta.headerPrimary;
-      document.getElementById('header-cta-secondary').innerText = t.cta.headerSecondary;
-      document.getElementById('cta-title').innerText = t.cta.sectionTitle;
-      document.getElementById('cta-text').innerText = t.cta.sectionText;
-      document.getElementById('main-cta-button').innerText = t.cta.sectionButton;
-    }
-
-    // Initialize after DOM loads
-    document.addEventListener('DOMContentLoaded', function() {
-      // Set language based on user preference
-      const lang = detectLanguage();
-      switchLang(lang);
-
-      // Show discount modal after 1.5 seconds if not shown before
-      if (!localStorage.getItem('discountModalShown')) {
-        setTimeout(() => {
-          showDiscountModal();
-          localStorage.setItem('discountModalShown', 'true');
-        }, 1500);
-      }
-
-      // Close discount banner
-      document.getElementById('discountBannerClose').addEventListener('click', function() {
-        document.getElementById('discountBanner').style.display = 'none';
-      });
-
-      // Menu management
-      const hamburger = document.getElementById('hamburger');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const overlay = document.getElementById('overlay');
-      const body = document.body;
-
-      hamburger.addEventListener('click', function() {
-        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', !isExpanded);
-        mobileMenu.classList.toggle('active');
-        overlay.classList.toggle('active');
-        body.classList.toggle('no-scroll');
-        this.classList.toggle('active');
-      });
-
-      // Close menu when clicking overlay
-      overlay.addEventListener('click', function() {
-        hamburger.setAttribute('aria-expanded', 'false');
-        mobileMenu.classList.remove('active');
-        overlay.classList.remove('active');
-        body.classList.remove('no-scroll');
-        hamburger.classList.remove('active');
-      });
-
-      // Close menu when clicking a link
-      const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-btn');
-      mobileLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          hamburger.setAttribute('aria-expanded', 'false');
-          mobileMenu.classList.remove('active');
-          overlay.classList.remove('active');
-          body.classList.remove('no-scroll');
-          hamburger.classList.remove('active');
+        // Обработчики событий
+        document.getElementById('confirm-btn').addEventListener('click', function() {
+            localStorage.setItem('preferredLang', userLang);
+            window.location.href = userLang + '/index.html';
         });
-      });
-
-      // Form handling
-      document.getElementById('contactForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const form = e.target;
-        const data = new FormData(form);
         
-        try {
-          const response = await fetch(form.action, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-          });
-
-          if (response.ok) {
-            form.reset();
-            const toast = document.getElementById('formSuccessToast');
-            toast.textContent = translations[document.documentElement.lang].toast;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
-          }
-        } catch (error) {
-          alert('Form submission error');
-        }
-      });
-    });
-  </script>
+        document.getElementById('change-btn').addEventListener('click', function() {
+            document.getElementById('detected-language').style.display = 'none';
+            document.getElementById('select-language').style.display = 'block';
+            document.getElementById('language-select').value = userLang;
+        });
+        
+        document.getElementById('select-confirm-btn').addEventListener('click', function() {
+            const selectedLang = document.getElementById('language-select').value;
+            localStorage.setItem('preferredLang', selectedLang);
+            window.location.href = selectedLang + '/index.html';
+        });
+        
+        // Автоматический редирект через 8 секунд
+        setTimeout(function() {
+            if (!window.location.href.includes('/index.html')) {
+                window.location.href = userLang + '/index.html';
+            }
+        }, 8000);
+    </script>
 </body>
 </html>

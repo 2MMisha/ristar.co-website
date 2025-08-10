@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rising Star Manager - Система управления конкурсами</title>
+  <style>
+    /* Discount Banner Styles */
+    .discount-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, #0c57ab, #28a745);
+      color: white;
+      padding: 15px 20px;
+      z-index: 1000;
+      box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .discount-banner-content {
+      flex: 1;
+    }
+    
+    .discount-banner-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+    }
+    
+    .discount-banner-text {
+      font-size: 0.9rem;
+    }
+    
+    .discount-banner-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      margin-left: 15px;
+    }
+    
+    .discount-banner-button {
+      background: white;
+      color: #0c57ab;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      margin-left: 15px;
+      white-space: nowrap;
+    }
+    
+    .discount-banner-button:hover {
+      background: #e6e6e6;
+    }
+    
+    /* Discount Modal Styles */
+    .discount-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, #0c57ab, #28a745);
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      z-index: 2000;
+      max-width: 90%;
+      width: 500px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      animation: modalAppear 0.5s ease-out;
+      text-align: center;
+    }
+    
+    .discount-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 1999;
+      backdrop-filter: blur(5px);
+    }
+    
+    .discount-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .discount-title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .discount-item {
+      background: rgba(255,255,255,0.15);
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    
+    .discount-percent {
+      font-size: 32px;
+      font-weight: bold;
+      color: #ffcc00;
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    .discount-note {
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #ffcc00;
+    }
+    
+    .discount-highlight {
+      background: rgba(255,255,255,0.2);
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+    
+    @keyframes modalAppear {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+    
+    @media (max-width: 600px) {
+      .discount-modal {
+        width: 90%;
+        padding: 20px;
+      }
+      
+      .discount-title {
+        font-size: 22px;
+      }
+      
+      .discount-percent {
+        font-size: 26px;
+      }
+      
+      .discount-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .discount-banner-button {
+        margin-top: 10px;
+        margin-left: 0;
+      }
+    }
+
+    /* LOADER */
+    #loader {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #0c57ab;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 1;
+      transition: opacity 0.7s ease;
+    }
+    #loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Hide content before load */
+    body.preload {
+      overflow: hidden;
+    }
+    body.preload > *:not(#loader) {
+      opacity: 0;
+      visibility: hidden;
+    }
+    body.loaded > *:not(#loader) {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .progress-bar {
+      width: 80%;
+      max-width: 400px;
+      height: 8px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 15px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.4);
+    }
+
+    .progress-bar-inner {
+      height: 100%;
+      width: 0;
+      background: #fff;
+      border-radius: 4px;
+      animation: progressLoad 3s linear forwards;
+    }
+
+    @keyframes progressLoad {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+
+    /* CTA Button Styles */
+    .cta-button {
+      display: inline-block;
+      background: white;
+      color: #0c57ab;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 1rem;
+      border: 2px solid white;
+    }
+    
+    .cta-button:hover {
+      background: transparent;
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    
+    .cta-button.secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      margin-left: 15px;
+    }
+    
+    .cta-button.secondary:hover {
+      background: white;
+      color: #0c57ab;
+    }
+    
+    .cta-section {
+      text-align: center;
+      margin: 40px 0;
+    }
+    
+    .cta-section h2 {
+      color: #0c57ab;
+      margin-bottom: 20px;
+    }
+    
+    .cta-section p {
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    /* Main styles */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arimo', 'Montserrat', sans-serif;
+      background-color: #0c57ab;
+      color: #fff;
+      height: 100%;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #0c57ab;
+      z-index: 1000;
+      padding: 10px 20px;
+      box-sizing: border-box;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .nav-brand img {
+      height: 40px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-brand img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Navigation links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      white-space: nowrap;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Buttons */
+    .nav-btn {
+      background: white;
+      color: #0c57ab;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .nav-btn:hover {
+      background: #e6e6e6;
+    }
+
+    /* Hamburger menu */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      margin: 5px 0;
+      transition: all 0.3s ease;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background: #0c57ab;
+      z-index: 1000;
+      transition: right 0.3s ease;
+      padding-top: 70px;
+      box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-menu-content {
+      display: flex;
+      flex-direction: column;
+      height: calc(100% - 70px);
+      padding: 20px;
+    }
+
+    .mobile-link {
+      color: white;
+      padding: 15px 0;
+      text-decoration: none;
+      font-size: 1.1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .mobile-btn {
+      background: white;
+      color: #0c57ab;
+      margin: 15px 0;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
+      padding: 12px;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Hide overlay after load */
+    body.loaded .overlay {
+      display: none;
+    }
+
+    /* Hamburger animations */
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* Other styles */
+    .div-start {
+      background-color: #0c57ab;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    header {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .header-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(12, 87, 171, 0.3);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px 20px;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      max-height: 80px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .tagline {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      max-width: 600px;
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 100px auto 40px auto;
+      background: #fff;
+      color: #1c1c1c;
+      border-radius: 12px;
+      box-sizing: border-box;
+    }
+
+    .description, .services {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .contact-form {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .contact-form h2 {
+      margin-bottom: 20px;
+      color: #0c57ab;
+    }
+
+    .contact-form form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .contact-form button {
+      padding: 12px 24px;
+      background-color: #0c57ab;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-form button:hover,
+    .contact-form button:focus {
+      background-color: #094a7a;
+      outline: none;
+    }
+
+    .form-success-toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #28a745;
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .form-success-toast.show {
+      display: block;
+      opacity: 1;
+    }
+
+    footer {
+      background-color: #0c57ab;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #fff;
+      margin-bottom: 60px; /* Account for fixed banner */
+    }
+
+    .no-scroll {
+      overflow: hidden;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 900px) {
+      section {
+        margin: 80px 15px 30px 15px;
+        padding: 30px 15px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .tagline {
+        font-size: 1.3rem;
+        max-width: 100%;
+      }
+      
+      .cta-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .cta-button.secondary {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .tagline {
+        font-size: 1rem;
+        padding: 8px;
+      }
+
+      section {
+        margin: 80px 10px 20px 10px;
+        padding: 20px 15px;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        font-size: 0.9rem;
+        padding: 10px;
+      }
+
+      .contact-form button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+      
+      .cta-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body class="preload">
+  <!-- LOADER -->
+  <div id="loader" role="alert" aria-live="assertive" aria-busy="true" aria-label="Загрузка сайта">
+    <div>Загрузка...</div>
+    <div class="progress-bar" aria-hidden="true">
+      <div class="progress-bar-inner"></div>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden;">
+    <h1>Rising Star Manager — управление конкурсами</h1>
+    <p>Онлайн-платформа для организации музыкальных, танцевальных и спортивных соревнований в Израиле и по всему миру. Простая регистрация участников, расписание, система судейства на планшетах, публикация результатов и управление конкурсами.</p>
+    <p>Регистрация на конкурсы, голосование судей, интерфейс на русском языке. Подходит для организаторов мероприятий любого масштаба: от местных школьных соревнований до международных фестивалей.</p>
+    <ul>
+      <li>Управление конкурсами</li>
+      <li>Платформа судейства</li>
+      <li>Онлайн-регистрация</li>
+      <li>Расписание мероприятий</li>
+      <li>Живая система баллов</li>
+      <li>Судейство на планшетах</li>
+    </ul>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-container">
+      <div class="nav-brand">
+        <img src="logo-w.png" alt="Rising Star Logo" onclick="window.location.href='index.html'" />
+        <img src="by2m.png" alt="2M Media Project" onclick="window.location.href='https://www.2mmedia.co'" />
+      </div>
+      
+      <!-- Desktop navigation -->
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Главная</a>
+        <a href="contact.html" class="nav-link">Контакты</a>
+        <a href="pitch.html" class="nav-link">Презентация</a>
+        <a href="https://results.ristar.co" class="nav-btn" target="_blank">Результаты</a>
+        <a href="https://registration.ristar.co" class="nav-btn" target="_blank">Регистрация</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-expanded="false" aria-label="Меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Mobile menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+          <a href="index.html" class="mobile-link">Главная</a>
+          <a href="contact.html" class="mobile-link">Контакты</a>
+          <a href="pitch.html" class="mobile-link">Презентация</a>
+          <a href="https://results.ristar.co" class="mobile-btn" target="_blank">Результаты</a>
+          <a href="https://registration.ristar.co" class="mobile-btn" target="_blank">Регистрация</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- MAIN CONTENT -->
+  <header>
+    <video autoplay muted loop playsinline class="video-bg" aria-hidden="true" tabindex="-1" preload="none" poster="placeholder.jpg">
+      <source src="header.webm" type="video/webm">
+    </video>
+    <div class="header-content">
+      <div class="div-start">
+        <img src="logo-w.png" alt="Rising Star Manager Logo" class="logo" />
+        <h1>Rising Star Manager</h1>
+        <div class="tagline">Ваши соревнования — наша система</div>
+        
+        <!-- Header CTA Buttons -->
+        <div class="cta-buttons">
+          <a href="contact.html" class="cta-button">Начать</a>
+          <a href="contact.html" class="cta-button secondary">Подробнее</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="description">
+      <p>Rising Star Manager — универсальный сервис для полного менеджмента соревнований.</p>
+    </div>
+    <h2 style="text-align:center; margin-bottom:30px;">Как работает система</h2>
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/handshake.png" alt="Соглашение" />
+        <span>Заключаем договор и настраиваем систему под вас</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/calendar.png" alt="Календарь" />
+        <span>Создаём событие и открываем регистрацию</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/add-user-group-man-man.png" alt="Регистрация" />
+        <span>Участники регистрируются онлайн</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/clock--v1.png" alt="Расписание" />
+        <span>Формируем расписание и распределяем по категориям</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/whistle.png" alt="Судейство" />
+        <span>Судейство проводится в системе</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/combo-chart--v1.png" alt="Результаты" />
+        <span>Система считает и обновляет результаты в реальном времени</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <img src="https://img.icons8.com/color/48/share-rounded.png" alt="Публикация" />
+        <span>Публикуем итоги и выдаём сертификаты</span>
+      </div>
+    </div>
+    
+    <!-- CTA Section after "How it works" -->
+    <div class="cta-section">
+      <h2>Готовы преобразовать ваши соревнования?</h2>
+      <p>Свяжитесь с нами сегодня, чтобы узнать, как Rising Star Manager может упростить процесс организации вашего мероприятия.</p>
+      <a href="contact.html" class="cta-button">Запросить демо</a>
+    </div>
+
+    <div class="contact-form">
+      <h2>Связаться с нами</h2>
+      <p>Нужна дополнительная информация? <a href="contact.html" style="color: #0c57ab; font-weight: bold;">Посетите страницу контактов</a> или отправьте нам сообщение ниже.</p>
+      <form id="contactForm" aria-label="Контактная форма" action="https://formsubmit.co/2mmedia.il@gmail.com" method="POST">
+        <input type="text" name="name" placeholder="Ваше имя" required aria-required="true" />
+        <input type="email" name="email" placeholder="Ваш Email" required aria-required="true" />
+        <textarea name="message" rows="5" placeholder="Ваше сообщение..." required aria-required="true"></textarea>
+        <input type="text" name="_honey" style="display:none" autocomplete="off" />
+        <input type="hidden" name="_captcha" value="false" />
+        <button type="submit">Отправить</button>
+      </form>
+      <div class="form-success-toast" id="formSuccessToast" role="alert" aria-live="assertive" aria-atomic="true">✅ Отправлено, спасибо!</div>
+    </div>
+  </section>
+
+  <footer>
+    <div>© 2025 Rising Star Manager. Все права защищены.</div>
+  </footer>
+
+  <!-- Discount Banner -->
+  <div class="discount-banner" id="discountBanner">
+    <div class="discount-banner-content">
+      <div class="discount-banner-title">СПЕЦИАЛЬНОЕ ПРЕДЛОЖЕНИЕ: скидка 55% для новых клиентов!</div>
+      <div class="discount-banner-text">Скидка 35% при переходе от другого сервиса с оставшимся сроком менее 30 дней. Все скидки суммируются!</div>
+    </div>
+    <a href="contact.html" class="discount-banner-button">Связаться с нами</a>
+    <button class="discount-banner-close" id="discountBannerClose">&times;</button>
+  </div>
+
+  <script>
+    // Simplified loader hiding logic
+    function hideLoader() {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.classList.add('hidden');
+        document.body.classList.remove('preload');
+        document.body.classList.add('loaded');
+        
+        setTimeout(() => {
+          loader.remove();
+          document.getElementById('overlay').style.display = 'none';
+        }, 700);
+      }
+    }
+
+    // Try to hide loader when page is fully loaded
+    window.addEventListener('load', hideLoader);
+
+    // Fallback in case load event doesn't fire
+    setTimeout(hideLoader, 2000);
+
+    // Show discount modal
+    function showDiscountModal() {
+      const overlay = document.createElement('div');
+      overlay.className = 'discount-overlay';
+      
+      const modal = document.createElement('div');
+      modal.className = 'discount-modal';
+      
+      modal.innerHTML = `
+        <button class="discount-close" aria-label="Закрыть окно скидки">&times;</button>
+        <div class="discount-title">🔥 ОГРОМНЫЕ СКИДКИ ДЛЯ НОВЫХ КЛИЕНТОВ! 🔥</div>
+        
+        <div class="discount-item">
+          <span class="discount-percent">55% СКИДКА</span>
+          Для новых клиентов при первом заказе нашей системы управления конкурсами!
+        </div>
+        
+        <div class="discount-item">
+          <span class="discount-percent">35% СКИДКА</span>
+          Если вы переходите к нам от другого сервиса и до окончания текущего контракта осталось менее 30 дней!
+        </div>
+        
+        <div class="discount-note">⚡ ВСЕ СКИДКИ <span class='discount-highlight'>СКЛАДЫВАЮТСЯ</span>! ⚡<br>Предложение действительно ограниченное время!</div>
+      `;
+      
+      document.body.appendChild(overlay);
+      document.body.appendChild(modal);
+      
+      // Close modal
+      modal.querySelector('.discount-close').addEventListener('click', function() {
+        document.body.removeChild(overlay);
+        document.body.removeChild(modal);
+      });
+      
+      // Close when clicking outside
+      overlay.addEventListener('click', function() {
+        document.body.removeChild(overlay);
+        document.body.removeChild(modal);
+      });
+    }
+
+    // Initialize after DOM loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Show discount modal after 1.5 seconds if not shown before
+      if (!localStorage.getItem('discountModalShown')) {
+        setTimeout(() => {
+          showDiscountModal();
+          localStorage.setItem('discountModalShown', 'true');
+        }, 1500);
+      }
+
+      // Close discount banner
+      document.getElementById('discountBannerClose').addEventListener('click', function() {
+        document.getElementById('discountBanner').style.display = 'none';
+      });
+
+      // Menu management
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('overlay');
+      const body = document.body;
+
+      hamburger.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('active');
+        overlay.classList.toggle('active');
+        body.classList.toggle('no-scroll');
+        this.classList.toggle('active');
+      });
+
+      // Close menu when clicking overlay
+      overlay.addEventListener('click', function() {
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        body.classList.remove('no-scroll');
+        hamburger.classList.remove('active');
+      });
+
+      // Close menu when clicking a link
+      const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-btn');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          hamburger.setAttribute('aria-expanded', 'false');
+          mobileMenu.classList.remove('active');
+          overlay.classList.remove('active');
+          body.classList.remove('no-scroll');
+          hamburger.classList.remove('active');
+        });
+      });
+
+      // Form handling
+      document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const data = new FormData(form);
+        
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            form.reset();
+            const toast = document.getElementById('formSuccessToast');
+            toast.textContent = '✅ Отправлено, спасибо!';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+          }
+        } catch (error) {
+          alert('Ошибка отправки формы');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Rising Star Manager — competition pitches" />
-  <meta name="keywords" content="competition, pitches, sports, ristar, rising star, rising star manager, israel" />
-  <meta name="author" content="Rising Star Manager Team" />
+  <meta name="description" content="Rising Star Manager — מצגות תחרויות" />
+  <meta name="keywords" content="תחרויות, מצגות, ספורט, ריסטאר, כוכב עולה, Rising Star Manager, ישראל" />
+  <meta name="author" content="צוות Rising Star Manager" />
   <meta name="theme-color" content="#0c57ab">
   <link rel="canonical" href="https://ristar.co/pitches" />
 
@@ -13,19 +13,19 @@
   <link rel="icon" href="icon.ico" type="image/x-icon" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Rising Star Manager Pitches" />
-  <meta property="og:description" content="Competition pitch selection platform." />
+  <meta property="og:title" content="Rising Star Manager - מצגות" />
+  <meta property="og:description" content="פלטפורמה להצגת מצגות תחרויות." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ristar.co/pitches" />
   <meta property="og:image" content="https://ristar.co/og-image.png" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Rising Star Manager Pitches" />
-  <meta name="twitter:description" content="Competition pitch selection platform." />
+  <meta name="twitter:title" content="Rising Star Manager - מצגות" />
+  <meta name="twitter:description" content="פלטפורמה להצגת מצגות תחרויות." />
   <meta name="twitter:image" content="https://ristar.co/twitter-image.png" />
 
-  <title>Rising Star Manager Pitches</title>
+  <title>Rising Star Manager - מצגות</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 
@@ -163,31 +163,6 @@
       background: #e6e6e6;
     }
 
-    /* Language buttons */
-    .lang-buttons {
-      display: flex;
-      gap: 5px;
-      margin-left: 15px;
-    }
-    
-    .lang-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 5px;
-    }
-    
-    .lang-btn img {
-      width: 24px;
-      height: 16px;
-      border-radius: 2px;
-      transition: transform 0.2s;
-    }
-    
-    .lang-btn:hover img {
-      transform: scale(1.1);
-    }
-
     /* Hamburger menu */
     .hamburger {
       display: none;
@@ -211,19 +186,19 @@
     .mobile-menu {
       position: fixed;
       top: 0;
-      right: -100%;
+      left: -100%;
       width: 80%;
       max-width: 300px;
       height: 100vh;
       background: #0c57ab;
       z-index: 1000;
-      transition: right 0.3s ease;
+      transition: left 0.3s ease;
       padding-top: 70px;
-      box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+      box-shadow: 5px 0 15px rgba(0,0,0,0.2);
     }
 
     .mobile-menu.active {
-      right: 0;
+      left: 0;
     }
 
     .mobile-menu-content {
@@ -249,15 +224,6 @@
       text-align: center;
       font-weight: bold;
       padding: 12px;
-    }
-
-    /* Language buttons in mobile menu */
-    .mobile-lang-switcher {
-      margin-top: auto;
-      padding-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
     }
 
     /* Overlay */
@@ -415,7 +381,7 @@
 <body class="preload">
   <!-- LOADER -->
   <div id="loader" role="alert" aria-live="assertive" aria-busy="true" aria-label="Loading website">
-    <div>Loading...</div>
+    <div>טוען...</div>
     <div class="progress-bar" aria-hidden="true">
       <div class="progress-bar-inner"></div>
     </div>
@@ -425,31 +391,19 @@
   <nav>
     <div class="nav-container">
       <div class="nav-brand">
-        <img src="logo-w.png" alt="Rising Star Logo" onclick="window.location.href='index.html'" />
+        <img src="logo-w.png" alt="לוגו Rising Star" onclick="window.location.href='index.html'" />
       </div>
       
       <!-- Desktop navigation -->
       <div class="nav-links">
-        <a href="index.html" class="nav-link" id="nav-home">Home</a>
-        <a href="pitch.html" class="nav-link" id="nav-pitches">Pitching Presentations</a>
-        <a href="contact.html" class="nav-link" id="nav-contact">Contact</a>
-        <a href="https://results.ristar.co" class="nav-btn" target="_blank" id="nav-results">Results</a>
-        <a href="https://registration.ristar.co" class="nav-btn" target="_blank" id="nav-register">Register</a>
-        
-        <div class="lang-buttons">
-          <button class="lang-btn" onclick="switchLang('en')" aria-label="English">
-            <img src="https://flagcdn.com/w40/gb.png" alt="English" />
-          </button>
-          <button class="lang-btn" onclick="switchLang('ru')" aria-label="Русский">
-            <img src="https://flagcdn.com/w40/ru.png" alt="Русский" />
-          </button>
-          <button class="lang-btn" onclick="switchLang('he')" aria-label="עברית">
-            <img src="https://flagcdn.com/w40/il.png" alt="עברית" />
-          </button>
-        </div>
+        <a href="index.html" class="nav-link">בית</a>
+        <a href="pitch.html" class="nav-link">מצגות</a>
+        <a href="contact.html" class="nav-link">יצירת קשר</a>
+        <a href="https://results.ristar.co" class="nav-btn" target="_blank">תוצאות</a>
+        <a href="https://registration.ristar.co" class="nav-btn" target="_blank">הרשמה</a>
       </div>
 
-      <button class="hamburger" id="hamburger" aria-expanded="false" aria-label="Menu">
+      <button class="hamburger" id="hamburger" aria-expanded="false" aria-label="תפריט">
         <span></span>
         <span></span>
         <span></span>
@@ -458,23 +412,11 @@
       <!-- Mobile menu -->
       <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-content">
-          <a href="index.html" class="mobile-link" id="mobile-home">Home</a>
-          <a href="pitch.html" class="mobile-link" id="mobile-pitches">Pitching Presentations</a>
-          <a href="contact.html" class="mobile-link" id="mobile-contact">Contact</a>
-          <a href="https://results.ristar.co" class="mobile-btn" target="_blank" id="mobile-results">Results</a>
-          <a href="https://registration.ristar.co" class="mobile-btn" target="_blank" id="mobile-register">Register</a>
-          
-          <div class="mobile-lang-switcher">
-            <button class="lang-btn" onclick="switchLang('en')" aria-label="English">
-              <img src="https://flagcdn.com/w40/gb.png" alt="English" />
-            </button>
-            <button class="lang-btn" onclick="switchLang('ru')" aria-label="Русский">
-              <img src="https://flagcdn.com/w40/ru.png" alt="Русский" />
-            </button>
-            <button class="lang-btn" onclick="switchLang('he')" aria-label="עברית">
-              <img src="https://flagcdn.com/w40/il.png" alt="עברית" />
-            </button>
-          </div>
+          <a href="index.html" class="mobile-link">בית</a>
+          <a href="pitch.html" class="mobile-link">מצגות</a>
+          <a href="contact.html" class="mobile-link">יצירת קשר</a>
+          <a href="https://results.ristar.co" class="mobile-btn" target="_blank">תוצאות</a>
+          <a href="https://registration.ristar.co" class="mobile-btn" target="_blank">הרשמה</a>
         </div>
       </div>
     </div>
@@ -486,144 +428,47 @@
   <!-- MAIN CONTENT -->
   <div class="pitch-container">
     <div class="pitch-header">
-      <h1 id="pitch-title">Product Presentation</h1>
-      <p id="pitch-subtitle">Select a language to view the pitch</p>
+      <h1>מצגת המוצר</h1>
+      <p>צפו במצגת התחרות שלנו</p>
     </div>
 
-    <div class="pitch-view" id="englishPitch">
-      <div class="canva-embed">
-        <iframe loading="lazy" src="https://www.canva.com/design/DAGtFa1VwSQ/MZT_QFHSnF-_6M2NLoX8cg/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
-      </div>
-      <div class="pitch-author">Author: Michael Mokrushov</div>
-    </div>
-
-    <div class="pitch-view" id="russianPitch" style="display: none;">
-      <div class="canva-embed">
-        <iframe loading="lazy" src="https://www.canva.com/design/DAGtgKm-5gg/FNaI12LvgBUqhWIBVAju9Q/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
-      </div>
-      <div class="pitch-author">Автор: Michael Mokrushov</div>
-    </div>
-
-    <div class="pitch-view" id="hebrewPitch" style="display: none;">
+    <div class="pitch-view">
       <div class="canva-embed">
         <iframe loading="lazy" src="https://www.canva.com/design/DAGtgJSBBww/fJlpQQaSk2J03fwrnuhUXg/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
       </div>
-      <div class="pitch-author">מחבר: Michael Mokrushov</div>
+      <div class="pitch-author">מחבר: מיכאל מוקרושוב</div>
     </div>
 
     <div style="text-align: center;">
-      <a href="index.html" class="back-button" id="backButton">Back to Home</a>
+      <a href="index.html" class="back-button">חזרה לדף הבית</a>
     </div>
   </div>
 
   <footer>
-    <div id="footer-text">© 2025 Rising Star Manager. All rights reserved.</div>
+    <div>© 2025 Rising Star Manager. כל הזכויות שמורות.</div>
     <a href="https://www.2mmedia.co" target="_blank" rel="noopener noreferrer">
         <img src="by2m.png" alt="2M Media" width="100">
+    </a>
   </footer>
 
   <script>
-    const translations = {
-      ru: {
-        lang: "ru", dir: "ltr",
-        title: "Презентация продукта",
-        subtitle: "Выберите язык для просмотра презентации",
-        backButton: "Вернуться на главную",
-        nav: { 
-          home: "Главная", 
-          pitches: "Презентации",
-          contact: "Контакты",
-          results: "Результаты",
-          register: "Регистрация"
-        },
-        footer: "Все права защищены."
-      },
-      en: {
-        lang: "en", dir: "ltr",
-        title: "Product Presentation",
-        subtitle: "Select a language to view the pitch",
-        backButton: "Back to Home",
-        nav: { 
-          home: "Home", 
-          pitches: "Pitching Presenations",
-          contact: "Contact",
-          results: "Results",
-          register: "Register"
-        },
-        footer: "All rights reserved."
-      },
-      he: {
-        lang: "he", dir: "rtl",
-        title: "מצגת המוצר",
-        subtitle: "בחר שפה כדי לצפות במצגת",
-        backButton: "חזרה לדף הבית",
-        nav: { 
-          home: "בית", 
-          pitches: "פרזטציית המוצר",
-          contact: "יצירת קשר",
-          results: "תוצאות",
-          register: "הרשמה"
-        },
-        footer: "כל הזכויות שמורות."
-      }
-    };
-
-    // Detect user's preferred language
-    function detectLanguage() {
-      const userLang = navigator.language || navigator.userLanguage;
-      if (userLang.startsWith('ru')) return 'ru';
-      if (userLang.startsWith('he')) return 'he';
-      return 'en'; // default to English
-    }
-
-    function switchLang(lang) {
-      const t = translations[lang];
-      document.documentElement.lang = t.lang;
-      document.documentElement.dir = t.dir;
-      document.title = t.title + " | Rising Star Manager";
-
-      // Update main content
-      document.getElementById('pitch-title').innerText = t.title;
-      document.getElementById('pitch-subtitle').innerText = t.subtitle;
-      document.getElementById('backButton').innerText = t.backButton;
-
-      // Update navigation
-      document.getElementById('nav-home').innerText = t.nav.home;
-      document.getElementById('nav-pitches').innerText = t.nav.pitches;
-      document.getElementById('nav-contact').innerText = t.nav.contact;
-      document.getElementById('nav-results').innerText = t.nav.results;
-      document.getElementById('nav-register').innerText = t.nav.register;
-
-      // Update mobile navigation
-      document.getElementById('mobile-home').innerText = t.nav.home;
-      document.getElementById('mobile-pitches').innerText = t.nav.pitches;
-      document.getElementById('mobile-contact').innerText = t.nav.contact;
-      document.getElementById('mobile-results').innerText = t.nav.results;
-      document.getElementById('mobile-register').innerText = t.nav.register;
-
-      // Update footer
-      document.getElementById('footer-text').innerText = `© 2025 Rising Star Manager. ${t.footer}`;
-
-      // Show the appropriate pitch
-      document.getElementById('englishPitch').style.display = 'none';
-      document.getElementById('russianPitch').style.display = 'none';
-      document.getElementById('hebrewPitch').style.display = 'none';
-      
-      if (lang === 'ru') {
-        document.getElementById('russianPitch').style.display = 'block';
-      } else if (lang === 'he') {
-        document.getElementById('hebrewPitch').style.display = 'block';
-      } else {
-        document.getElementById('englishPitch').style.display = 'block';
+    // Simplified loader hiding logic
+    function hideLoader() {
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.classList.add('hidden');
+        document.body.classList.remove('preload');
+        document.body.classList.add('loaded');
+        
+        setTimeout(() => {
+          loader.remove();
+          document.getElementById('overlay').style.display = 'none';
+        }, 700);
       }
     }
 
     // Initialize after DOM loads
     document.addEventListener('DOMContentLoaded', function() {
-      // Set language based on user preference
-      const initialLang = detectLanguage();
-      switchLang(initialLang);
-
       // Menu management
       const hamburger = document.getElementById('hamburger');
       const mobileMenu = document.getElementById('mobileMenu');
@@ -660,37 +505,11 @@
         });
       });
 
-      // Page load completion
-      window.addEventListener('load', function() {
-        const loader = document.getElementById('loader');
-        if (loader) {
-          loader.classList.add('hidden');
-          document.body.classList.remove('preload');
-          document.body.classList.add('loaded');
-          
-          // Remove loader and hide overlay
-          setTimeout(() => {
-            loader.remove();
-            overlay.style.display = 'none';
-          }, 700);
-        }
-      });
+      // Try to hide loader when page is fully loaded
+      window.addEventListener('load', hideLoader);
 
-      // Loader fallback
-      setTimeout(function() {
-        if (document.body.classList.contains('preload')) {
-          const loader = document.getElementById('loader');
-          if (loader) {
-            loader.classList.add('hidden');
-            document.body.classList.remove('preload');
-            document.body.classList.add('loaded');
-            setTimeout(() => {
-              loader.remove();
-              overlay.style.display = 'none';
-            }, 700);
-          }
-        }
-      }, 5000);
+      // Fallback in case load event doesn't fire
+      setTimeout(hideLoader, 2000);
     });
   </script>
 </body>
