@@ -425,6 +425,146 @@
   <!-- Overlay -->
   <div class="overlay" id="overlay"></div>
 
+  <!-- Google Analytics Consent -->
+<script>
+(function() {
+  // Проверяем, не выбрал ли уже пользователь
+  const consent = localStorage.getItem("cookie_consent");
+  if (consent) {
+    if (consent === "accepted") {
+      loadGA();
+    }
+    return;
+  }
+
+  // Тексты на разных языках
+  const texts = {
+    he: {
+      title: "קובצי Cookie (ИВРИТ)",
+      message: 'אנו משתמשים בעוגיות לצורך Google Analytics. קראו עוד ב <a href="http://law.ristar.co/#privacy" target="_blank">מדיניות הפרטיות (ИВРИТ)</a>.',
+      yes: "כן (ИВРИТ)",
+      no: "לא (ИВРИТ)",
+      dir: "rtl"
+    },
+    ru: {
+      title: "Мы используем cookies (ИВРИТ)",
+      message: 'Мы используем cookies для Google Analytics. Подробнее читайте в <a href="http://law.ristar.co/#privacy" target="_blank">Политике конфиденциальности (ИВРИТ)</a>.',
+      yes: "Да (ИВРИТ)",
+      no: "Нет (ИВРИТ)",
+      dir: "ltr"
+    },
+    en: {
+      title: "We use cookies (ИВРИТ)",
+      message: 'We use cookies for Google Analytics. Read more in our <a href="http://law.ristar.co/#privacy" target="_blank">Privacy Policy (ИВРИТ)</a>.',
+      yes: "Yes (ИВРИТ)",
+      no: "No (ИВРИТ)",
+      dir: "ltr"
+    }
+  };
+
+  // Определяем язык
+  const lang = (navigator.language || "en").substring(0,2);
+  const t = texts[lang] || texts.en;
+
+  // Создаем окно
+  const box = document.createElement("div");
+  box.id = "cookie-consent-box";
+  box.dir = t.dir;
+  box.innerHTML = `
+    <h4>${t.title}</h4>
+    <p>${t.message}</p>
+    <div class="buttons">
+      <button id="accept-cookies">${t.yes}</button>
+      <button id="decline-cookies">${t.no}</button>
+    </div>
+  `;
+  document.body.appendChild(box);
+
+  // Обработчики
+  document.getElementById("accept-cookies").onclick = function() {
+    localStorage.setItem("cookie_consent", "accepted");
+    box.remove();
+    loadGA();
+  };
+  document.getElementById("decline-cookies").onclick = function() {
+    localStorage.setItem("cookie_consent", "declined");
+    box.remove();
+  };
+
+  // Функция подключения GA
+  function loadGA() {
+    var gtagScript = document.createElement("script");
+    gtagScript.async = true;
+    gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-T5HV2DLL1D";
+    document.head.appendChild(gtagScript);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+
+    gtag("js", new Date());
+    gtag("config", "G-T5HV2DLL1D");
+  }
+})();
+</script>
+
+<style>
+  #cookie-consent-box {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 420px;
+    background: #fff;
+    border: 2px solid #0c57ab;
+    color: #333;
+    padding: 18px 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    font-size: 15px;
+    line-height: 1.5;
+    z-index: 2000;
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+  }
+  #cookie-consent-box h4 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #0c57ab;
+  }
+  #cookie-consent-box p { margin: 0 0 12px 0; }
+  #cookie-consent-box a { color: #0c57ab; text-decoration: underline; }
+  #cookie-consent-box .buttons {
+    text-align: right;
+  }
+  #cookie-consent-box button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 8px;
+    font-size: 14px;
+    transition: background 0.3s ease;
+  }
+  #accept-cookies {
+    background: #28a745;
+    color: #fff;
+  }
+  #accept-cookies:hover { background: #218838; }
+  #decline-cookies {
+    background: #ccc;
+    color: #333;
+  }
+  #decline-cookies:hover { background: #999; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, 30px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+  }
+</style>
+
   <!-- MAIN CONTENT -->
   <div class="pitch-container">
     <div class="pitch-header">
