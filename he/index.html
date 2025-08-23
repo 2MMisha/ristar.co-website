@@ -1009,7 +1009,73 @@
   </section>
 
   <footer>
-    <div id="footer-text">© 2025 Rising Star Manager. כל הזכויות שמורות.</div>
+ <style>
+  .site-footer {
+    background-color: #0c57ab;
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .site-footer a {
+    color: #ffcc00;
+    text-decoration: underline;
+    margin: 0 8px;
+  }
+  .site-footer a:hover {
+    color: #fff;
+  }
+</style>
+
+<footer class="site-footer" id="site-footer"></footer>
+
+<script>
+(function() {
+  const texts = {
+    he: {
+      links: [
+        {text: "הצהרת נגישות", url: "http://law.ristar.co/#access"},
+        {text: "תנאי שימוש", url: "http://law.ristar.co/#terms"},
+        {text: "מדיניות פרטיות", url: "http://law.ristar.co/#privacy"},
+        {text: "צור קשר", url: "http://law.ristar.co/#contact"}
+      ],
+      dir: "rtl"
+    },
+    ru: {
+      links: [
+        {text: "Декларация о доступности (ИВРИТ)", url: "http://law.ristar.co/#access"},
+        {text: "Условия пользования (ИВРИТ)", url: "http://law.ristar.co/#terms"},
+        {text: "Политика конфиденциальности (ИВРИТ)", url: "http://law.ristar.co/#privacy"},
+        {text: "Контакт по юр. вопросам (ИВРИТ)", url: "http://law.ristar.co/#contact"}
+      ],
+      dir: "ltr"
+    },
+    en: {
+      links: [
+        {text: "Accessibility Declaration (HEBREW)", url: "http://law.ristar.co/#access"},
+        {text: "Terms of Use (HEBREW)", url: "http://law.ristar.co/#terms"},
+        {text: "Privacy Policy (HEBREW)", url: "http://law.ristar.co/#privacy"},
+        {text: "Legal Contact (HEBREW)", url: "http://law.ristar.co/#contact"}
+      ],
+      dir: "ltr"
+    }
+  };
+
+  const lang = (navigator.language || "en").substring(0,2);
+  const t = texts[lang] || texts.en;
+
+  const footer = document.getElementById("site-footer");
+  footer.dir = t.dir;
+
+  const linksHTML = t.links.map(l => `<a href="${l.url}" target="_blank">${l.text}</a>`).join(" | ");
+  footer.innerHTML = `
+    <div>${linksHTML}</div>
+    <div style="margin-top:5px;">2M Media Creative Agency | 2025 | All rights reserved</div>
+  `;
+})();
+</script>
+
   </footer>
 
   <!-- Discount Banner -->
